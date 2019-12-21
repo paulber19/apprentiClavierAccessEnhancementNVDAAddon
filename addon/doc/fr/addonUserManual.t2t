@@ -1,0 +1,93 @@
+ApprentiClavier : complément d'accessibilité - manuel utilisateur
+Auteur: paulber19
+
+
+
+% add-on version
+%!PostProc (html): ADDON_VERSION 1.0
+%!Target: html
+%!Encoding: UTF-8
+%!Options: --toc
+%!style:..\style_t2t.css
+% Remove the Table of Contents heading from the toc.
+%!PostProc(html): '^.*\<LI\>\<A HREF="#toc"\>.*\</A\>.*$' ''
+
+% h1 in html should really be the document title only.
+% Therefore, change h1 through h5 in the output to h2 through h6.
+%!PostProc(html): ^<H5>(.*)</H5>$ <H6>\1</H6>
+%!PostProc(html): ^<H4>(.*)</H4>$ <H5>\1</H5>
+%!PostProc(html): ^<H3>(.*)</H3>$ <H4>\1</H4>
+%!PostProc(html): ^<H2>(.*)</H2>$ <H3>\1</H3>
+%!PostProc(html): ^<H1>(.*)</H1>$ <H2>\1</H2>
+
+URL: paulber19@laposte.net
+
+Téléchargement:
+- [Version stable  https://rawgit.com/paulber007/AllMyNVDAAddons/master/apprentiClavierAccessEnhancement/apprentiClavierAccessEnhancement-1.0.nvda-addon]
+- [Versions de développement https://github.com/paulber007/AllMyNVDAAddons/tree/master/apprentiClavierAccessEnhancement/dev]
+
+
+= Sommaire =[toc]
+%%toc
+
++ Introduction +
+
+++ Fonctionnalités ++
+Cette extension tente de rendre le plus accessible possible le logiciel ApprentiClavier   sous NVDA.
+
+Elle n'ajoute aucun script  .
+
+++ mise à jour ++
+La mise à jour de l'extension se fait, par défaut, automatiquement peu de temps après le démarrage de NVDA (entre 20 et 600 secondes) et au maximum une fois par jour.
+
+Il est possible de désactiver cette mise à jour en décochant l'option "Rechercher automatiquement les mises à jour"  se trouvant dans les paramètres de l'extension, élément de menu "Mise à jour".
+
+La version de l'extension peut être:
+-  soit une version stable: son numéro de version est du type "1.0" par exemple.
+- soit une version de  développement: son numéro de version est alors du type "1.0-dev1", ou "1.0-rc1", ou "1.0-beta2".
+
+
+Par défaut, une  version stable est mise à jour avec une version stable plus récente (numéro de version supérieur).
+Mais il est possible de mettre à jour la version stable courante avec une version de développement de la prochaine version stable. Il suffit de cocher l'option "Mettre aussi à jour les versions stable vers les versions de développement  " situé dans les paramètres de l'extension, élement de menu "Mise à jour".
+
+Une version de développement  est mise à jour avec une version de développement plus récente ou avec sa version stable.
+
+Le bouton "Rechercher une mise à jour", placé dans les paramètres de l'extension, élément de menu "Mise à jour", permet de rechercher immédiatement une mise à jour.
+
+
+
+++ Compatibilité ++
+Cette extension a été testée avec ApprentiClavier version française 1.0.9.
+
+Version minimum de NVDA requise: 2019.1
+
+Dernière version  de NVDA testée: 2019.3
+
++ Historique +
+++ v1.0 (17/10/2019) ++
+- Changement du nom de l'extension et retour en version 1.0
+- compatibilité avec NVDA 2019.2 et versions alpha de NVDA 2019.3.
+- mise en place de la mise à jour automatique de l'extension.
+
+
+++ v2.2.1 (21 Juillet2016) ++
+- correction du "y" non prononcé
+
+
+++ v2.2 29 Octobre 2014) ++
+- compatibilité avec NVDA 2014.4
+
+
+++ v2.1 29 Octobre 2014) ++
+- compatibilité avec NVDA 2014.3
+
+
+
+++ v2.0 10 Juin 2013) ++
+- Refonte complète du code  source 
+
+
+++ v1.0 (2 janvier Novembre 2012) ++
+Création de l'extension
+
+
