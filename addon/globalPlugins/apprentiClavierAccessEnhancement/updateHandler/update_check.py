@@ -299,6 +299,14 @@ class CheckForAddonUpdate(object):
 		latestUpdateInfos = self.getLatestUpdateInfos(self.updateInfosFile)
 		if latestUpdateInfos is None:
 			return
+		# check if service is in maintenance
+		if latestUpdateInfos .get("inMaintenance") and latestUpdateInfos ["inMaintenance"]:
+			if auto: return
+			gui.messageBox(
+				_("The service is temporarily under maintenance. Please, try again later."),
+				self.title,
+				wx.OK|wx.ICON_INFORMATION)
+			return
 		addonUpdateInfos = latestUpdateInfos.get(self.addon.manifest["name"])
 		if addonUpdateInfos is None:
 			# no update for this add-on

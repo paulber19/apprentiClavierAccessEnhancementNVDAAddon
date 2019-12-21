@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 # install.py
 # a part of apprentiClavierAccessEnhancement add-on
 # Copyright 2019 paulber19
@@ -6,7 +7,6 @@
 
 import addonHandler
 addonHandler.initTranslation()
-
 
 previousNameAndAuthor = ("ApprentiClavierAppModule", "Paul from NVDA-script list")
 previousConfigFileName = "apprentiClavierAddon.ini"
