@@ -52,6 +52,9 @@ Cette extension a été testée avec ApprentiClavier version française 1.0.9.
 
 
 + Historique +
++ v1.1.1 (14/02/2019) ++
+Correction du fichier addon_build.t2tconf.
+
 + v1.1 (29/12/2019) ++
 - Compatibilité avec 2019.3
 - mise en forme de la documentation
@@ -82,5 +85,3 @@ Cette extension a été testée avec ApprentiClavier version française 1.0.9.
 
 ++ v1.0 (2 janvier Novembre 2012) ++
 Création de l'extension
-
-
