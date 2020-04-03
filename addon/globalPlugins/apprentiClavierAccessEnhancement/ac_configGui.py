@@ -47,7 +47,8 @@ class ApprentiClavierSettingsDialog(SettingsDialog):
 	
 	def onCheckForUpdate(self, evt):
 		from .updateHandler import addonUpdateCheck
-		wx.CallAfter(addonUpdateCheck, auto = False, releaseToDev = _addonConfigManager.toggleUpdateReleaseVersionsToDevVersions(False))
+		releaseToDevVersion = self.updateReleaseVersionsToDevVersionsCheckBox.IsChecked() # or toggleUpdateReleaseVersionsToDevVersionsGeneralOptions(False)
+		wx.CallAfter(addonUpdateCheck, auto = False, releaseToDev =releaseToDevVersion  )
 		self.Close()
 	
 	def postInit(self):
@@ -56,7 +57,6 @@ class ApprentiClavierSettingsDialog(SettingsDialog):
 	def saveSettingChanges (self):
 		if self.autoCheckForUpdatesCheckBox.IsChecked() != _addonConfigManager .toggleAutoUpdateCheck(False):
 			_addonConfigManager .toggleAutoUpdateCheck(True)
-		
 		if self.updateReleaseVersionsToDevVersionsCheckBox.IsChecked() != _addonConfigManager .toggleUpdateReleaseVersionsToDevVersions     (False):
 			_addonConfigManager .toggleUpdateReleaseVersionsToDevVersions     (True)
 	
