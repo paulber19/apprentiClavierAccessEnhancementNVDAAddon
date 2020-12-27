@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: apprentiClavierAccessEnhancement\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-18 10:09+0200\n"
-"PO-Revision-Date: 2019-10-18 10:09+0200\n"
+"POT-Creation-Date: 2020-12-23 09:16+0100\n"
+"PO-Revision-Date: 2020-12-23 09:18+0100\n"
 "Last-Translator: Paul ( french scriptNVDA list)\n"
 "Language-Team: paulber19 <paulber19@laposte.net>\n"
 "Language: fr_FR\n"
@@ -29,13 +29,14 @@ msgstr "ApprentiClavier: compléments d'accessibilité"
 msgid ""
 "Provide voice assistance  to ApprentiClavier keyboard learner (only french "
 "version).\n"
-"Compatible and Tested with ApprentiClavier french version 1.0.9 .\n"
+"Compatible and Tested with ApprentiClavier french version 1.0.9  and "
+"1.0.10.\n"
 msgstr ""
 "Cette extension Apporte une assistance vocale pour ApprentiClavier, logiciel "
 "d'apprentissage du clavier  (uniquement la version française).  \n"
 "Elle n'ajoute aucun script.\n"
-"Elle est Compatible et testée avec ApprentiClavier version  française "
-"1.0.9.\n"
+"Elle est Compatible et testée avec ApprentiClavier version  française 1.0.9 "
+"et 1.0.10.\n"
 
 #: globalPlugins/apprentiClavierAccessEnhancement/ac_configGui.py:26
 #, python-format
@@ -43,7 +44,7 @@ msgid "%s - settings"
 msgstr "%s - Paramètres"
 
 #: globalPlugins/apprentiClavierAccessEnhancement/ac_configGui.py:31
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:129
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:107
 msgid "Update"
 msgstr "Mise à jour"
 
@@ -60,11 +61,11 @@ msgstr ""
 msgid "&Check for update"
 msgstr "&Rechercher une mise à jour"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:63
-msgid "The update is not compatible with this version of Windows."
-msgstr "La mise à jour n'est pas compatible avec cette version de Windows"
+#: globalPlugins/apprentiClavierAccessEnhancement/ac_configGui.py:48
+msgid "View &history"
+msgstr "&Voir l'historique"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:82
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:60
 #, python-brace-format
 msgid ""
 "The update is not compatible with this version of NVDA. Minimum NVDA "
@@ -74,70 +75,79 @@ msgstr ""
 "minimum de NVDA : {minYear}.{minMajor}, dernière version testée : "
 "{testedYear}.{testedMajor}."
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:131
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:110
 #, python-brace-format
 msgid "Downloading {name}"
 msgstr "Téléchargement de {name} en cours"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:145
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:125
 #, python-brace-format
 msgid "Error downloading update for {name}."
 msgstr "Erreur lors du téléchargement de la mise à jour de {name}."
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:201
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:184
 #, python-brace-format
 msgid "Cannot update {name} - missing file or invalid file format"
 msgstr ""
 "Impossible de mettre à jour {name} - fichier manquant ou format de fichier "
 "incorrect"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:232
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:220
 msgid "Updating"
 msgstr "Mise à jour en cours"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:234
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:222
 msgid "Please wait while the add-on is being updated."
 msgstr "Veuillez patienter durant la mise à jour de l'extension"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:241
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:233
 #, python-brace-format
 msgid "Failed to update {name} add-on"
 msgstr "Échec de la mise à jour de l'extension {name}"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:297
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:291
 #, python-brace-format
 msgid "{summary} - update"
 msgstr "{summary} - mise à jour"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:319
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:301
+msgid "The service is temporarily under maintenance. Please, try again later."
+msgstr ""
+"le service est momentanément en maintenance. Veuillez réessayer plus tard."
+
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:354
 #, python-format
 msgid "New version available, version %s. Do you want download it now?"
 msgstr ""
 "Une nouvelle version est disponible: version %s. Voulez-vous la télécharger "
 "maintenant ?"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:333
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:371
 #, python-format
 msgid "You are up-to-date. %s is the latest version."
 msgstr "Vous êtes à jour, %s est la dernière version."
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:339
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:378
 msgid "Oops! There was a problem checking for updates. Please retry later"
 msgstr ""
 "Oups! Il y a un problème pour rechercher les mises à jour. Réessayer "
 "ultérieurement."
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:493
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:555
 msgid "&Yes"
 msgstr "&Oui"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:497
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:560
 msgid "&No"
 msgstr "&Non"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:501
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:565
 msgid "&Later"
 msgstr "&Plus tard"
+
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:569
+msgid "Wha&t's new"
+msgstr "Quoi &de neuf"
 
 #: installTasks.py:48
 msgid "Do you want to keep current add-on configuration settings ?"
@@ -147,3 +157,6 @@ msgstr "Voulez vous conserver les paramètres  actuels du module?"
 #, python-format
 msgid "%s - installation"
 msgstr "%s - installation"
+
+#~ msgid "The update is not compatible with this version of Windows."
+#~ msgstr "La mise à jour n'est pas compatible avec cette version de Windows"

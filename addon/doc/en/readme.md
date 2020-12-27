@@ -2,21 +2,16 @@
 
 * Author : PaulBer19
 * URL : paulber19@laposte.net
-*Download:
+* Download:
 	* [Stable version][1]
 	* [Developpement' versions][2]
 * Compatibility:
 	* Minimum required NVDA version:  2019.1
-	* Last NVDA version tested:  2020.2
+	* Last NVDA version tested:  2020.4
 
-Provide voice assistance  to ApprentiClavier keyboard learner (for french Azerty keyboard).
+Provide voice assistance  to ApprentiClavier keyboard learner (french version and for french Azerty keyboard).
 
-Compatible and Tested with ApprentiClavier french version 1.0.9 .
+Compatible and Tested with ApprentiClavier french version 1.0.9  and 1.0.10.
 
-Minimum required NVDA version:  2019.1
-
-Last NVDA version tested:  2019.3
-
-
-[1]: https://rawgit.com/paulber007/AllMyNVDAAddons/master/apprentiClavierAccessEnhancement/apprentiClavierAccessEnhancement-1.3.nvda-addon
+[1]: https://rawgit.com/paulber007/AllMyNVDAAddons/master/apprentiClavierAccessEnhancement/apprentiClavierAccessEnhancement-1.4.nvda-addon
 [2]: https://github.com/paulber007/AllMyNVDAAddons/tree/master/apprentiClavierAccessEnhancement/dev

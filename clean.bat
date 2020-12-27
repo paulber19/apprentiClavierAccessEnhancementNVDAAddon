@@ -4,4 +4,3 @@ del /s /q  *.pyc
 del /s /q .sconsign.dblite
 del *.pot
 
-

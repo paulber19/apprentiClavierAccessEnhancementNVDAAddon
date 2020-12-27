@@ -1,0 +1,67 @@
+ADDON_SUMMARY - user manual
+Author: ADDON_AUTHOR_NAME
+
+
+%!includeconf: ../addon_userManual.t2tconf
+%!includeconf: addon_informations.t2tconf
+
+
+URL: ADDON_AUTHOR_URL
+
+[GitHub repository: ADDON_REPOSITORY ADDON_REPOSITORY]
+
+Download:
+- [stable version  ADDON_CUR_VERSION ADDON_DOWNLOAD_SERVER1]
+- [development version ADDON_DEV_URL]
+
+
+Compatibility:
+- minimum NVDA version supported: MINIMUM_NVDA_VERSION
+- last tested NVDA version: LAST_TESTED_NVDA_VERSION
+
+
+= Sommaire =[toc]
+%%toc
+
+
+
+Sorry, but this is an automatic translation from french user manual.
++ Introduction +
+
+++ Features ++
+This extension tries to make the ApprentiClavier software (only french version)  as accessible as possible under NVDA.
+
+It does not add any script.
+
+++ Compatibility ++
+This extension has been tested with ApprentiClavier French version 1.0.9 and 1.0.10.
+
+++ update ++
+By default, the extension update is done automatically shortly after NVDA starts up (between 20 and 600 seconds) and at most once a day.
+It is possible to deactivate this update by unchecking the option "Automatically check for updates" located in the "Update" category of the extension settings.
+The extension version can be:
+- or a stable version: its version number is of the type "1.0" for example.
+- either a development version: its version number is then of the type "1.0-dev1", or "1.0-rc1", or "1.0-beta2".
+
+
+By default, a stable version is updated with a more recent stable version (higher version number).
+But it is possible to update the current stable version with a development version of the next stable version. All you have to do is check the option "Also update stable versions to development versions" located in the extension's settings, menu item "Update".
+
+A development version is updated:
+- with a more recent development version,
+- with its stable version,
+- or with the latest stable version if the previous option is not checked.
+
+
+The "Search for an update" button placed in the "Update" category of the extension parameters, allows you to immediately search for an update.
+
+The "Search for an update" button placed in the "Update" category of the extension parameters, allows you to immediately search for an update.
+
+The "View history" button, placed in this same category, allows you to display the history of the current version in the browser.
+
+In the case of an automatic update and if a new version is detected, the "Update" dialog box is displayed to suggest:
+- either the immediate installation of the new version,
+- or to postpone the update until later. In this case, the search will be restarted at least one hour later.
+
+
+In the case of an update to a stable version, the "What's new" button offers the possibility of opening, in the browser, the history of the extension and thus being able to know the new features of the proposed version.

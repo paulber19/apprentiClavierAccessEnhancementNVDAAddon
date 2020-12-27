@@ -1,10 +1,13 @@
 # -*- coding: UTF-8 -*-
+import os.path
 
 # Build customizations
 # Change this file instead of sconstruct or manifest files, whenever possible.
 
 # Full getext (please don't change)
-_ = lambda x : x
+def _(arg):
+	return arg
+
 
 # Add-on information variables
 addon_info = {
@@ -18,10 +21,10 @@ addon_info = {
 	# Add-on description
 	# Translators: Long description to be shown for this add-on on add-on information from add-ons manager
 	"addon_description" : _("""Provide voice assistance  to ApprentiClavier keyboard learner (only french version).
-Compatible and Tested with ApprentiClavier french version 1.0.9 .
+Compatible and Tested with ApprentiClavier french version 1.0.9  and 1.0.10.
 """),
 	# version
-	"addon_version" : "1.3",
+	"addon_version" : "1.4",
 	# Author(s)
 	"addon_author" : "PaulBer19",
 	# URL for the add-on documentation support
@@ -37,7 +40,7 @@ Compatible and Tested with ApprentiClavier french version 1.0.9 .
 }
 
 
-import os.path
+
 # Define the python files that are the sources of your add-on.
 # You can use glob expressions here, they will be expanded.
 pythonSources = [
@@ -54,3 +57,8 @@ i18nSources = pythonSources
 # Files that will be ignored when building the nvda-addon file
 # Paths are relative to the addon directory, not to the root directory of your addon sources.
 excludedFiles = []
+
+# Base language for the NVDA add-on
+# If your add-on is written in a language other than english, modify this variable.
+# For example, set baseLanguage to "es" if your add-on is primarily written in spanish.
+baseLanguage = "en"

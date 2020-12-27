@@ -1,0 +1,71 @@
+ADDON_SUMMARY - History
+Author: ADDON_AUTHOR_NAME
+
+
+
+%!includeconf: ../addon_global.t2tconf
+%!includeconf: addon_informations.t2tconf
+
+
+URL: ADDON_AUTHOR_URL
+
+[GitHub repository: ADDON_REPOSITORY ADDON_REPOSITORY]
+
+Download:
+- [current stable version: ADDON_CUR_VERSION ADDON_DOWNLOAD_SERVER1]
+- [previous stable version: ADDON_PREV_VERSION ADDON_DOWNLOAD_PREVIOUS]
+- [development versions: ADDON_DEV_URL]
+
+
++ 1.4 (22/12/2020) +
+- compatibility with NVDA 2020.4
+- addition of the "View history" button in the "Update" category of the extension parameters.
+- addition of the "What's new" button in the dialog proposing the installation of a new update.
+- correction of errors remembered by the Flake8 validation tool.
+
+
++ v1.3 (28/07/2020) +
+Compatibility with NVDA 2020.2
+
+
++ v1.2.1 (03/04/2020) +
+Fixed extension change history.
+
++ v1.2 (03/04/2020) +
+- compatibility with NVDA 2020.1,
+- compliance with NVDA for the compatibility test of the extension with NVDA.
+
+
++ v1.1.1 (14/02/2020) +
+Fixed addon_build.t2tconf file.
+
+
++ v1.1 (29/12/2019) +
+- Compatibility with 2019.3
+- formatting of the documentation
+
+
++ v1.0 (17/10/2019) +
+- Change of extension name and return to version 1.0
+- compatibility with NVDA 2019.2 and alpha versions of NVDA 2019.3.
+- implementation of the automatic update of the extension.
+
+
++ v2.2.1 (21 Juillet2016) +
+- correction of unspoken "y"
+
+
++ v2.2 29 Octobre 2014) +
+- compatibility with NVDA 2014.4
+
+
++ v2.1 29 Octobre 2014) +
+- compatibility with NVDA 2014.3
+
+
++ v2.0 10 Juin 2013) +
+- Complete redesign of the source code
+
+
++ v1.0 (2 janvier Novembre 2012) +
+Creation of the extension

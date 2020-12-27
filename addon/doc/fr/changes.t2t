@@ -1,0 +1,74 @@
+ADDON_SUMMARY - historique
+Auteur: ADDON_AUTHOR_NAME
+
+
+
+%!includeconf: ../addon_global.t2tconf
+%!includeconf: addon_informations.t2tconf
+
+
+URL: ADDON_AUTHOR_URL
+
+[Dépot GitHub: ADDON_REPOSITORY ADDON_REPOSITORY]
+
+Téléchargement:
+- [Version stable actuelle: ADDON_CUR_VERSION ADDON_DOWNLOAD_SERVER1]
+- [Version stable précédente: ADDON_PREV_VERSION ADDON_DOWNLOAD_PREVIOUS]
+- [versions de développement ADDON_DEV_URL]
+
+
++ 1.4 (22/12/2020) +
+- compatibilité avec NVDA 2020.4
+- ajout du bouton "Voir l'historique" dans la catégorie "Mise à jour " des paramètres de l'extension.
+- ajout du bouton "Quoi de neuf" dans le dialogue proposant l'installation d'une nouvelle mise à jour.
+- correction des erreurs souvelées par l'outil de validation Flake8.
+
+
++ v1.3 (28/07/2020) +
+Compatibilité avec NVDA 2020.2
+
+
+
++ v1.2.1 (03/04/2020) +
+Correction de l'historique des changements de l'extension.
+
+
++ v1.2 (03/04/2020) +
+- mise en compatibilité avec NVDA 2020.1,
+- mise en conformité avec NVDA pour le test de compatibilité de l'extension avec NVDA.
+
+
+
++ v1.1.1 (14/02/2020) +
+Correction du fichier addon_build.t2tconf.
+
++ v1.1 (29/12/2019) +
+- Compatibilité avec 2019.3
+- mise en forme de la documentation
+
+
++ v1.0 (17/10/2019) +
+- Changement du nom de l'extension et retour en version 1.0
+- compatibilité avec NVDA 2019.2 et versions alpha de NVDA 2019.3.
+- mise en place de la mise à jour automatique de l'extension.
+
+
++ v2.2.1 (21 Juillet2016) +
+- correction du "y" non prononcé
+
+
++ v2.2 29 Octobre 2014) +
+- compatibilité avec NVDA 2014.4
+
+
++ v2.1 29 Octobre 2014) +
+- compatibilité avec NVDA 2014.3
+
+
+
++ v2.0 10 Juin 2013) +
+- Refonte complète du code  source 
+
+
++ v1.0 (2 janvier Novembre 2012) +
+Création de l'extension
