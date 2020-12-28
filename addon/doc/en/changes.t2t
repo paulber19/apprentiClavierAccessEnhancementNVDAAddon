@@ -17,6 +17,10 @@ Download:
 - [development versions: ADDON_DEV_URL]
 
 
++ 1.4.1 (28/12/2020) +
+Fixed "lastTestedNVDAVersion" parameter in buildVars.py file.
+
+
 + 1.4 (22/12/2020) +
 - compatibility with NVDA 2020.4
 - addition of the "View history" button in the "Update" category of the extension parameters.

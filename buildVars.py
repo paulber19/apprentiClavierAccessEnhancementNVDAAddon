@@ -24,7 +24,7 @@ addon_info = {
 Compatible and Tested with ApprentiClavier french version 1.0.9  and 1.0.10.
 """),
 	# version
-	"addon_version" : "1.4",
+	"addon_version" : "1.4.1",
 	# Author(s)
 	"addon_author" : "PaulBer19",
 	# URL for the add-on documentation support
@@ -34,7 +34,7 @@ Compatible and Tested with ApprentiClavier french version 1.0.9  and 1.0.10.
 	# Minimum NVDA version supported (e.g. "2018.3")
 	"addon_minimumNVDAVersion" : "2019.1",
 	# Last NVDA version supported/tested (e.g. "2018.4", ideally more recent than minimum version)
-	"addon_lastTestedNVDAVersion" : "2020.2",
+	"addon_lastTestedNVDAVersion" : "2020.4",
 	# Add-on update channel (default is stable or None)
 	"addon_updateChannel" : None,
 }

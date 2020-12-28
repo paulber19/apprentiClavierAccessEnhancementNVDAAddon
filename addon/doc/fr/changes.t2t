@@ -17,6 +17,10 @@ Téléchargement:
 - [versions de développement ADDON_DEV_URL]
 
 
++ 1.4.1 (28/12/2020) +
+Correction du paramètre "lastTestedNVDAVersion" du fichier buildVars.py.
+
+
 + 1.4 (22/12/2020) +
 - compatibilité avec NVDA 2020.4
 - ajout du bouton "Voir l'historique" dans la catégorie "Mise à jour " des paramètres de l'extension.
