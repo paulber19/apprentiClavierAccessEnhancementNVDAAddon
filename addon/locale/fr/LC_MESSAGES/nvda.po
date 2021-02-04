@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: apprentiClavierAccessEnhancement\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-12-23 09:16+0100\n"
-"PO-Revision-Date: 2020-12-23 09:18+0100\n"
+"PO-Revision-Date: 2021-02-04 08:12+0100\n"
 "Last-Translator: Paul ( french scriptNVDA list)\n"
 "Language-Team: paulber19 <paulber19@laposte.net>\n"
 "Language: fr_FR\n"
@@ -19,7 +19,7 @@ msgstr ""
 #: appModules/apprenticlavier/ac_config.py:163
 #, python-format
 msgid "Error parsing ApprentiClavier configuration file: %s"
-msgstr "Erreur de décodage du fichier de configurationdu module: %s"
+msgstr "Erreur de décodage du fichier de configuration de l'extension: %s"
 
 #: buildVars.py:17
 msgid "ApprentiClavier: accessibility enhancement"
@@ -151,7 +151,7 @@ msgstr "Quoi &de neuf"
 
 #: installTasks.py:48
 msgid "Do you want to keep current add-on configuration settings ?"
-msgstr "Voulez vous conserver les paramètres  actuels du module?"
+msgstr "Voulez vous conserver les paramètres  actuels de l'extension ?"
 
 #: installTasks.py:50
 #, python-format

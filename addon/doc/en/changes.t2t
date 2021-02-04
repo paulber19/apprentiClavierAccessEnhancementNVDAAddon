@@ -17,6 +17,9 @@ Download:
 - [development versions: ADDON_DEV_URL]
 
 
++ 1.4.2 (04/02/2021) +
+Added Arabic translation
+
 + 1.4.1 (28/12/2020) +
 Fixed "lastTestedNVDAVersion" parameter in buildVars.py file.
 

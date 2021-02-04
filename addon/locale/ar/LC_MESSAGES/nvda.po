@@ -1,0 +1,161 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: apprentiClavierAccessEnhancement 1.3\n"
+"Report-Msgid-Bugs-To: nvda-translations@freelists.org\n"
+"POT-Creation-Date: 2020-07-28 15:29+0200\n"
+"PO-Revision-Date: 2020-12-27 06:49+0200\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.12\n"
+
+#. Add-on summary, usually the user visible name of the addon.
+#. Translators: Summary for this add-on to be shown on installation and add-on information.
+#: buildVars.py:17
+msgid "ApprentiClavier: accessibility enhancement"
+msgstr "تحسين إمكانية الوصول لي:ApprentiClavier"
+
+#. Add-on description
+#. Translators: Long description to be shown for this add-on on add-on information from add-ons manager
+#: buildVars.py:20
+msgid ""
+"Provide voice assistance  to ApprentiClavier keyboard learner (only french "
+"version).\n"
+"Compatible and Tested with ApprentiClavier french version 1.0.9 .\n"
+msgstr ""
+"توفير مساعدة صوتية لمتعلم لوحة المفاتيح ApprentiClavier (النسخة الفرنسية "
+"فقط). \n"
+"متوافق وتم اختباره مع الإصدار الفرنسي 1.0.9 من ApprentiClavier. \n"
+
+#. Translators: the label of a message box dialog  to ask the user if he wants keep current configuration settings.
+#: installTasks.py:48
+msgid "Do you want to keep current add-on configuration settings ?"
+msgstr "هل تريد الاحتفاظ بإعدادات تكوين الوظيفة الإضافية الحالية؟"
+
+#. Translators: the title of a message box dialog.
+#: installTasks.py:50
+#, python-format
+msgid "%s - installation"
+msgstr "%sجاري  - تثبيت"
+
+#. Translators: message to user to report parsing error.
+#: appModules\apprenticlavier\ac_config.py:163
+#, python-format
+msgid "Error parsing ApprentiClavier configuration file: %s"
+msgstr "خطأ في تحليل ملف تكوين ApprentiClavier:%s"
+
+#. Translators: This is the label for the ApprentiClaviery settings  dialog.
+#: globalPlugins\apprentiClavierAccessEnhancement\ac_configGui.py:26
+#, python-format
+msgid "%s - settings"
+msgstr "إعدادات- %s"
+
+#. Translators: This is the label for a group of editing options in the ApprentiClavier settings panel.
+#. Translators: The title of the dialog displayed while downloading add-on update.
+#: globalPlugins\apprentiClavierAccessEnhancement\ac_configGui.py:31
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:104
+msgid "Update"
+msgstr "تحديث"
+
+#. Translators: This is the label for a checkbox in the ApprentiClavier SettingsDialog.
+#: globalPlugins\apprentiClavierAccessEnhancement\ac_configGui.py:35
+msgid "Automatically check for &updates "
+msgstr "البح&ث عن التحديثات تلقائيا"
+
+#. Translators: This is the label for a checkbox in the ApprentiClavier settings panel.
+#: globalPlugins\apprentiClavierAccessEnhancement\ac_configGui.py:39
+msgid "Update also release versions to &developpement versions"
+msgstr "&تحديث إصدارات التطوير"
+
+#. translators: label for a button in ApprentiClavier settings panel.
+#: globalPlugins\apprentiClavierAccessEnhancement\ac_configGui.py:43
+msgid "&Check for update"
+msgstr "الب&حث عن التحديثات"
+
+#. Translators: The message displayed when trying to update an add-on that is not going to be compatible with the current version of NVDA.
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:59
+msgid ""
+"The update is not compatible with this version of NVDA. Minimum NVDA "
+"version: {minYear}{minMajor}, last tested: {testedYear}.{testedMajor}."
+msgstr ""
+"التحديث غير متوافق مع هذا الإصدار من NVDA. الحد الأدنى لإصدار NVDA: "
+"{minYear} {minMajor} ، آخر اختبار: {testYear}. {testMajor}."
+
+#. Translators: The progress message indicating the name of the add-on being downloaded.
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:106
+msgid "Downloading {name}"
+msgstr "جاري تنزيل {name}"
+
+#. Translators: A message indicating that an error occurred while downloading an update to NVDA.
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:120
+msgid "Error downloading update for {name}."
+msgstr "خطأ في تنزيل التحديثس ل {name}."
+
+#. Translators: The message displayed when an error occurs when trying to update an add-on package due to package problems.
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:176
+msgid "Cannot update {name} - missing file or invalid file format"
+msgstr "لا يمكن تحديث {name} - ملف مفقود أو تنسيق ملف غير صالح"
+
+#. Translators: The title of the dialog presented while an Addon is being updated.
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:206
+msgid "Updating"
+msgstr "جاري التحديث"
+
+#. Translators: The message displayed while an addon is being updated.
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:208
+msgid "Please wait while the add-on is being updated."
+msgstr "يرجى الانتظار بينما يتم تحديث الوظيفة الإضافية."
+
+#. Translators: The message displayed when an error occurs when installing an add-on package.
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:215
+msgid "Failed to update {name} add-on"
+msgstr "فشل تحديث الوظيفة الإضافية {name}"
+
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:271
+msgid "{summary} - update"
+msgstr "{ملخص} - تحديث"
+
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:280
+msgid "The service is temporarily under maintenance. Please, try again later."
+msgstr "الخدمة تحت الصيانة مؤقتا. الرجاء معاودة المحاولة في وقت لاحق."
+
+#. Translators: message to user to report a new version.
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:301
+#, python-format
+msgid "New version available, version %s. Do you want download it now?"
+msgstr "يتوفر إصدار جديد ، الإصدار %s. هل تريد تحميله الآن؟"
+
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:315
+#, python-format
+msgid "You are up-to-date. %s is the latest version."
+msgstr "لا يوجد تحديث الإصدار %s هو أحدث إصدار"
+
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:321
+msgid "Oops! There was a problem checking for updates. Please retry later"
+msgstr ""
+"وجه الفتاة! كانت هناك مشكلة في التحقق من وجود تحديثات. الرجاء إعادة "
+"المحاولة لاحقًا"
+
+#. Translators: This is a label of a button appearing on UpdateCheckResult dialog.
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:475
+msgid "&Yes"
+msgstr "&نعم"
+
+#. Translators: This is a label of a button appearing on UpdateCheckResult dialog.
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:479
+msgid "&No"
+msgstr "&لا "
+
+#. this prompt was triggered by auto update checker
+#. Translators: The label of a button to remind the user later about performing some action.
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:483
+msgid "&Later"
+msgstr "&في وقت لاحق"

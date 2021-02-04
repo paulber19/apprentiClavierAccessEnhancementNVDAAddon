@@ -16,5 +16,5 @@ Elle n'ajoute aucun script.
 Elle est Compatible et testée avec ApprentiClavier version  française 1.0.9   et 1.0.10.
 
 
-[1]: https://github.com/paulber007/AllMyNVDAAddons/raw/master/apprentiClavierAccessEnhancement/apprentiClavierAccessEnhancement-1.4.nvda-addon
+[1]: https://github.com/paulber007/AllMyNVDAAddons/raw/master/apprentiClavierAccessEnhancement/apprentiClavierAccessEnhancement-1.4.2.nvda-addon
 [2]: https://github.com/paulber007/AllMyNVDAAddons/tree/master/apprentiClavierAccessEnhancement/dev
