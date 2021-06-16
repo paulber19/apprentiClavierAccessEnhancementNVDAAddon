@@ -36,7 +36,7 @@ It does not add any script.
 ++ Compatibility ++
 This extension has been tested with ApprentiClavier French version 1.0.9 and 1.0.10.
 
-++ update ++
+++ Update ++
 By default, the extension update is done automatically shortly after NVDA starts up (between 20 and 600 seconds) and at most once a day.
 It is possible to deactivate this update by unchecking the option "Automatically check for updates" located in the "Update" category of the extension settings.
 The extension version can be:
@@ -55,7 +55,6 @@ A development version is updated:
 
 The "Search for an update" button placed in the "Update" category of the extension parameters, allows you to immediately search for an update.
 
-The "Search for an update" button placed in the "Update" category of the extension parameters, allows you to immediately search for an update.
 
 The "View history" button, placed in this same category, allows you to display the history of the current version in the browser.
 

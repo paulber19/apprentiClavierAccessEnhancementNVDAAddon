@@ -51,6 +51,7 @@ class ApprentiClavierSettingsDialog(SettingsDialog):
 
 	def onCheckForUpdate(self, evt):
 		from .updateHandler import addonUpdateCheck
+		self.saveSettingChanges()
 		releaseToDevVersion = self.updateReleaseVersionsToDevVersionsCheckBox.IsChecked()
 		wx.CallAfter(addonUpdateCheck, auto=False, releaseToDev=releaseToDevVersion)
 		self.Close()

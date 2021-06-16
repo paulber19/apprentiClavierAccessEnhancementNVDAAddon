@@ -17,6 +17,11 @@ Download:
 - [development versions: ADDON_DEV_URL]
 
 
++ 1.5 (06/16/2021) +
+- compatibility with NVDA 2021.1. Versions of NVDA prior to 2019.3 are not supported.
+- removed code specific to Python 2.7.
+
+
 + 1.4.2 (04/02/2021) +
 Added Arabic translation
 

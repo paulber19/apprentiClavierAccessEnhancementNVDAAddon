@@ -8,13 +8,10 @@ import addonHandler
 import os
 import globalVars
 from configobj import ConfigObj
-# ConfigObj 5.1.0 and later integrates validate module.
-try:
-	from configobj.validate import Validator
-except ImportError:
-	from validate import Validator
-from ac_py3Compatibility import importStringIO
-StringIO = importStringIO()
+from configobj.validate import Validator
+
+from io import StringIO
+
 addonHandler.initTranslation()
 
 # config section

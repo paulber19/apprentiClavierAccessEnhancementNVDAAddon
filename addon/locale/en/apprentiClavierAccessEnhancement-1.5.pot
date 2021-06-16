@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: apprentiClavierAccessEnhancement 1.4.2\n"
+"Project-Id-Version: apprentiClavierAccessEnhancement 1.5\n"
 "Report-Msgid-Bugs-To: nvda-translations@freelists.org\n"
-"POT-Creation-Date: 2021-02-04 08:13+0100\n"
+"POT-Creation-Date: 2021-06-16 12:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,18 +34,18 @@ msgid ""
 msgstr ""
 
 #. Translators: the label of a message box dialog  to ask the user if he wants keep current configuration settings.
-#: installTasks.py:48
+#: installTasks.py:44
 msgid "Do you want to keep current add-on configuration settings ?"
 msgstr ""
 
 #. Translators: the title of a message box dialog.
-#: installTasks.py:50
+#: installTasks.py:46
 #, python-format
 msgid "%s - installation"
 msgstr ""
 
 #. Translators: message to user to report parsing error.
-#: appModules\apprenticlavier\ac_config.py:157
+#: appModules\apprenticlavier\ac_config.py:148
 #, python-format
 msgid "Error parsing ApprentiClavier configuration file: %s"
 msgstr ""
@@ -85,7 +85,7 @@ msgstr ""
 #: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:60
 msgid ""
 "The update is not compatible with this version of NVDA. Minimum NVDA "
-"version: {minYear}{minMajor}, last tested: {testedYear}.{testedMajor}."
+"version: {minYear}.{minMajor}, last tested: {testedYear}.{testedMajor}."
 msgstr ""
 
 #. Translators: The progress message
@@ -133,7 +133,7 @@ msgstr ""
 #. Translators: message to user to report a new version.
 #: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:354
 #, python-format
-msgid "New version available, version %s. Do you want download it now?"
+msgid "New version%s is available. Do you want to download it now?"
 msgstr ""
 
 #: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:371
@@ -147,22 +147,22 @@ msgstr ""
 
 #. Translators: This is a label of a button appearing
 #. on UpdateCheckResult dialog.
-#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:555
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:535
 msgid "&Yes"
 msgstr ""
 
 #. Translators: This is a label of a button appearing
 #. on UpdateCheckResult dialog.
-#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:560
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:540
 msgid "&No"
 msgstr ""
 
 #. Translators: The label of a button to remind the user later
 #. about performing some action.
-#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:565
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:545
 msgid "&Later"
 msgstr ""
 
-#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:569
+#: globalPlugins\apprentiClavierAccessEnhancement\updateHandler\update_check.py:549
 msgid "Wha&t's new"
 msgstr ""

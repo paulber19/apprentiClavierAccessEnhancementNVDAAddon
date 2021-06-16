@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: apprentiClavierAccessEnhancement\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-23 09:16+0100\n"
-"PO-Revision-Date: 2021-02-04 08:12+0100\n"
+"POT-Creation-Date: 2021-05-29 18:48+0200\n"
+"PO-Revision-Date: 2021-05-29 18:48+0200\n"
 "Last-Translator: Paul ( french scriptNVDA list)\n"
 "Language-Team: paulber19 <paulber19@laposte.net>\n"
 "Language: fr_FR\n"
@@ -16,16 +16,16 @@ msgstr ""
 "X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: appModules/apprenticlavier/ac_config.py:163
+#: appModules/apprenticlavier/ac_config.py:148
 #, python-format
 msgid "Error parsing ApprentiClavier configuration file: %s"
 msgstr "Erreur de décodage du fichier de configuration de l'extension: %s"
 
-#: buildVars.py:17
+#: buildVars.py:20
 msgid "ApprentiClavier: accessibility enhancement"
 msgstr "ApprentiClavier: compléments d'accessibilité"
 
-#: buildVars.py:20
+#: buildVars.py:23
 msgid ""
 "Provide voice assistance  to ApprentiClavier keyboard learner (only french "
 "version).\n"
@@ -38,30 +38,30 @@ msgstr ""
 "Elle est Compatible et testée avec ApprentiClavier version  française 1.0.9 "
 "et 1.0.10.\n"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/ac_configGui.py:26
+#: globalPlugins/apprentiClavierAccessEnhancement/ac_configGui.py:25
 #, python-format
 msgid "%s - settings"
 msgstr "%s - Paramètres"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/ac_configGui.py:31
+#: globalPlugins/apprentiClavierAccessEnhancement/ac_configGui.py:30
 #: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:107
 msgid "Update"
 msgstr "Mise à jour"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/ac_configGui.py:35
+#: globalPlugins/apprentiClavierAccessEnhancement/ac_configGui.py:34
 msgid "Automatically check for &updates "
 msgstr "Rechercher &automatiquement les mises à jour"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/ac_configGui.py:39
+#: globalPlugins/apprentiClavierAccessEnhancement/ac_configGui.py:38
 msgid "Update also release versions to &developpement versions"
 msgstr ""
 "&Mettre aussi à jour les versions stable vers les versions de développement"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/ac_configGui.py:43
+#: globalPlugins/apprentiClavierAccessEnhancement/ac_configGui.py:42
 msgid "&Check for update"
 msgstr "&Rechercher une mise à jour"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/ac_configGui.py:48
+#: globalPlugins/apprentiClavierAccessEnhancement/ac_configGui.py:47
 msgid "View &history"
 msgstr "&Voir l'historique"
 
@@ -69,7 +69,7 @@ msgstr "&Voir l'historique"
 #, python-brace-format
 msgid ""
 "The update is not compatible with this version of NVDA. Minimum NVDA "
-"version: {minYear}{minMajor}, last tested: {testedYear}.{testedMajor}."
+"version: {minYear}.{minMajor}, last tested: {testedYear}.{testedMajor}."
 msgstr ""
 "La mise à jour n'est pas compatible avec cette version de NVDA. Version "
 "minimum de NVDA : {minYear}.{minMajor}, dernière version testée : "
@@ -117,10 +117,10 @@ msgstr ""
 
 #: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:354
 #, python-format
-msgid "New version available, version %s. Do you want download it now?"
+msgid "New version%s is available. Do you want to download it now?"
 msgstr ""
-"Une nouvelle version est disponible: version %s. Voulez-vous la télécharger "
-"maintenant ?"
+"La nouvelle version %s est disponible. Voulez-vous la télécharger "
+"maintenant ?"
 
 #: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:371
 #, python-format
@@ -133,30 +133,27 @@ msgstr ""
 "Oups! Il y a un problème pour rechercher les mises à jour. Réessayer "
 "ultérieurement."
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:555
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:535
 msgid "&Yes"
 msgstr "&Oui"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:560
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:540
 msgid "&No"
 msgstr "&Non"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:565
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:545
 msgid "&Later"
 msgstr "&Plus tard"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:569
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:549
 msgid "Wha&t's new"
 msgstr "Quoi &de neuf"
 
-#: installTasks.py:48
+#: installTasks.py:44
 msgid "Do you want to keep current add-on configuration settings ?"
 msgstr "Voulez vous conserver les paramètres  actuels de l'extension ?"
 
-#: installTasks.py:50
+#: installTasks.py:46
 #, python-format
 msgid "%s - installation"
 msgstr "%s - installation"
-
-#~ msgid "The update is not compatible with this version of Windows."
-#~ msgstr "La mise à jour n'est pas compatible avec cette version de Windows"

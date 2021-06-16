@@ -1,26 +1,17 @@
 # appModules\apprenticlavier\ac_config.py
 # a part of apprentiClavierAccessEnhancement add-on
-# Copyright (C) 2019-2020, Paulber19
+# Copyright (C) 2019-2021, Paulber19
 # This file is covered by the GNU General Public License.
 
 # Manages ApprentiClavier add-on configuration.
 import addonHandler
 from logHandler import log
 import os
-from configobj import ConfigObj, ConfigObjError
 import globalVars
-import sys
-addon = addonHandler.getCodeAddon()
-path = os.path.join(addon.path, "shared")
-sys.path.append(path)
-from ac_py3Compatibility import importStringIO  # noqa:E402
-del sys.path[-1]
-StringIO = importStringIO()
-# ConfigObj 5.1.0 and later integrates validate module.
-try:
-	from configobj.validate import Validator, VdtTypeError
-except ImportError:
-	from validate import Validator, VdtTypeError
+
+from configobj import ConfigObj, ConfigObjError
+from configobj.validate import Validator, VdtTypeError
+from io import StringIO
 
 # config section
 SCT_General = "General"
