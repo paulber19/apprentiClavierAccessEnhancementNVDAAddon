@@ -17,6 +17,9 @@ Téléchargement:
 - [versions de développement ADDON_DEV_URL]
 
 
++ 1.6 (03/11/2021) +
+compatibilité  avec NVDA 2021.3. Les versions de NVDA antérieure à la 2020.4 ne sont pas supportées.
+
 + 1.5 (16/06/2021) +
 - compatibilité  avec NVDA 2021.1. Les versions de NVDA antérieure à la 2019.3 ne sont pas supportées.
 - suppression du code spécifique à Python 2.7.

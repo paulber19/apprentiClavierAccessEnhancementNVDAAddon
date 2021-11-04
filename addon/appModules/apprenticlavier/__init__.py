@@ -1,15 +1,19 @@
 # -*- coding: iso-8859-15 -*-
 # appModules\aprenticlavier\___init__.py
 # a part of apprentiClavierAccessEnhancement add-on
-# Copyright (C) 2019, Paulber19
+# Copyright (C) 2019-2021, Paulber19
 # This file is covered by the GNU General Public License.
 
 import addonHandler
 from logHandler import log
 import globalVars
-from controlTypes import *  # noqa:F403
 import appModuleHandler
-from characterProcessing import SYMLVL_ALL
+try:
+	# for nvda version >= 2021.2
+	from characterProcessing import SymbolLevel
+	SYMLVL_ALL = SymbolLevel.ALL
+except ImportError:
+	from characterProcessing import SYMLVL_ALL
 import speech
 import ui
 import api
@@ -21,7 +25,12 @@ from editableText import EditableText
 from oleacc import *  # noqa:F403
 from IAccessibleHandler import accNavigate
 import config
-import controlTypes
+try:
+	# for nvda version >= 2021.2
+	from controlTypes.state import State
+	STATE_INVISIBLE  = State.INVISIBLE 
+except ImportError:
+	from controlTypes import STATE_INVISIBLE
 from . import ac_voiceControl
 from .ac_lessonsMode import *  # noqa:F403
 addon = addonHandler.getCodeAddon()
@@ -217,7 +226,7 @@ def getScoreControlID():
 	obj = api.getForegroundObject()
 	o = obj.firstChild
 	while o:
-		if (controlTypes.STATE_INVISIBLE not in o.states) and (o.windowClassName == "ThunderRTTextBox"):
+		if (STATE_INVISIBLE not in o.states) and (o.windowClassName == "ThunderRTTextBox"):
 			return o.windowControlID
 		o = o.next
 	return -1

@@ -1,16 +1,30 @@
 # -*- coding: iso-8859-15 -*-
 # appModules\apprenticlavier\ac_voiceControl.py
 # a part of apprentiClavierAccessEnhancement add-on
-# Copyright (C) 2019- 2020, Paulber19
+# Copyright (C) 2019- 2021, Paulber19
 # This file is covered by the GNU General Public License.
 
 
 import addonHandler
 from logHandler import log
+
+try:
+	# for nvda version >= 2021.2
+	from characterProcessing import SymbolLevel
+	SYMLVL_SOME = SymbolLevel.SOME
+	SYMLVL_ALL = SymbolLevel.ALL
+except ImportError:
+	from characterProcessing import SYMLVL_SOME, SYMLVL_ALL
 import config
-from characterProcessing import SYMLVL_SOME, SYMLVL_ALL
 import globalVars
 import api
+try:
+	# for nvda version >= 2021.2
+	from controlTypes.state import State
+	STATE_CHECKED  = State.CHECKED 
+except ImportError:
+	import controlTypes
+	STATE_CHECKED  = controlTypes.STATE_CHECKED 
 from . import ac_config
 
 addonHandler.initTranslation()
@@ -38,7 +52,7 @@ def getUserOptions():
 	while o:
 		try:
 			state = False
-			if controlTypes.STATE_CHECKED in o.states:
+			if STATE_CHECKED in o.states:
 				state = True
 			if o.name is not None and len(o.name) > 0:
 				GB_userOptions[o.name] = state
