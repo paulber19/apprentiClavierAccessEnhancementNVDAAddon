@@ -15,7 +15,18 @@ Download:
 - [current stable version: ADDON_CUR_VERSION ADDON_DOWNLOAD_SERVER1]
 - [previous stable version: ADDON_PREV_VERSION ADDON_DOWNLOAD_PREVIOUS]
 - [development versions: ADDON_DEV_URL]
++ 1.7 (01/26/2022) +
+-compatibility with NVDA 2022.1.
+- reset the configuration in the event of errors in the configuration file.
 
+
+Changes:
+- during an automatic update of the extension, it no longer asks the user if he wants to keep the current configuration parameters of the extension.
+- during a manual installation of the extension, a confirmation request is requested when the user has chosen not to keep the current parameters of the extension configuration.
+
+
++ 1.6 (11/03/2021) +
+compatibility with NVDA 2021.3. Versions of NVDA prior to 2020.4 are not supported.
 
 + 1.5 (06/16/2021) +
 - compatibility with NVDA 2021.1. Versions of NVDA prior to 2019.3 are not supported.

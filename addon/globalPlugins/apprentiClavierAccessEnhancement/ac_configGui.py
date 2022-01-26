@@ -1,6 +1,6 @@
 # globalPlugins\apprentiClavierAccessEnhancement\ac_configGui.py
 # a part of aprentiClavierAccessEnhancement add-on
-# Copyright 2019,paulber19
+# Copyright 2019-2022,paulber19
 # This file is covered by the GNU General Public License.
 
 # manage add-on configuration dialog
@@ -15,7 +15,7 @@ _curAddon = addonHandler.getCodeAddon()
 _addonSummary = _curAddon.manifest['summary']
 path = os.path.join(_curAddon.path, "shared")
 sys.path.append(path)
-from ac_addonConfigManager import _addonConfigManager  # noqa:E402
+from ac_addonConfigManager import _addonConfigManager
 del sys.path[-1]
 addonHandler.initTranslation()
 
@@ -28,7 +28,8 @@ class ApprentiClavierSettingsDialog(SettingsDialog):
 		sHelper = gui.guiHelper.BoxSizerHelper(self, sizer=settingsSizer)
 		# Translators: This is the label for a group of editing options in the ApprentiClavier settings panel.
 		groupText = _("Update")
-		group = gui.guiHelper.BoxSizerHelper(self, sizer=wx.StaticBoxSizer(wx.StaticBox(self, label=groupText), wx.VERTICAL))
+		group = gui.guiHelper.BoxSizerHelper(
+			self, sizer=wx.StaticBoxSizer(wx.StaticBox(self, label=groupText), wx.VERTICAL))
 		sHelper.addItem(group)
 		# Translators: This is the label for a checkbox in the ApprentiClavier SettingsDialog.
 		labelText = _("Automatically check for &updates ")
@@ -36,8 +37,10 @@ class ApprentiClavierSettingsDialog(SettingsDialog):
 		self.autoCheckForUpdatesCheckBox.SetValue(_addonConfigManager.toggleAutoUpdateCheck(False))
 		# Translators: This is the label for a checkbox in the ApprentiClavier settings panel.
 		labelText = _("Update also release versions to &developpement versions")
-		self.updateReleaseVersionsToDevVersionsCheckBox = group.addItem(wx.CheckBox(self, wx.ID_ANY, label=labelText))
-		self.updateReleaseVersionsToDevVersionsCheckBox.SetValue(_addonConfigManager.toggleUpdateReleaseVersionsToDevVersions(False))
+		self.updateReleaseVersionsToDevVersionsCheckBox = group.addItem(
+			wx.CheckBox(self, wx.ID_ANY, label=labelText))
+		self.updateReleaseVersionsToDevVersionsCheckBox.SetValue(
+			_addonConfigManager.toggleUpdateReleaseVersionsToDevVersions(False))
 		# translators: label for a button in ApprentiClavier settings panel.
 		labelText = _("&Check for update")
 		checkForUpdateButton = wx.Button(self, label=labelText)
@@ -74,7 +77,8 @@ class ApprentiClavierSettingsDialog(SettingsDialog):
 	def saveSettingChanges(self):
 		if self.autoCheckForUpdatesCheckBox.IsChecked() != _addonConfigManager .toggleAutoUpdateCheck(False):
 			_addonConfigManager .toggleAutoUpdateCheck(True)
-		if self.updateReleaseVersionsToDevVersionsCheckBox.IsChecked() != _addonConfigManager .toggleUpdateReleaseVersionsToDevVersions(False):
+		if self.updateReleaseVersionsToDevVersionsCheckBox.IsChecked() != (
+			_addonConfigManager .toggleUpdateReleaseVersionsToDevVersions(False)):
 			_addonConfigManager .toggleUpdateReleaseVersionsToDevVersions(True)
 
 	def onOk(self, evt):

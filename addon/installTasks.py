@@ -1,16 +1,20 @@
 # -*- coding: UTF-8 -*-
 # install.py
 # a part of apprentiClavierAccessEnhancement add-on
-# Copyright 2021 paulber19
-#This file is covered by the GNU General Public License.
+# Copyright 2021-2022 paulber19
+# This file is covered by the GNU General Public License.
 
 
 import addonHandler
+import os
+from logHandler import log
+from addonHandler import _availableAddons
+
 addonHandler.initTranslation()
 
 previousNameAndAuthor = ("ApprentiClavierAppModule", "Paul from NVDA-script list")
 previousConfigFileName = "apprentiClavierAddon.ini"
-saveConfigFileName = "addonConfig_old.ini"
+
 
 def uninstallPreviousVersion():
 	for addon in addonHandler.getAvailableAddons():
@@ -18,62 +22,77 @@ def uninstallPreviousVersion():
 			addon.requestRemove()
 			break
 
-def onInstall():
-	import os
+
+def saveFile(theFile, path):
 	import shutil
+	if not os.path.exists(theFile):
+		return
+	try:
+		shutil.copy(theFile, path)
+		os.remove(theFile)
+		log.warning("%s file copied in %s and deleted" % (path, theFile))
+	except Exception:
+		log.warning("Error: %s file cannot be move to %s" % (theFile, path))
+
+
+def onInstall():
 	import globalVars
 	import wx
 	import gui
-	from logHandler import log
 	curPath = os.path.dirname(__file__)
-	from addonHandler import _availableAddons 
-	addon = _availableAddons [curPath]
+	addon = _availableAddons[curPath]
 	addonName = addon.manifest["name"]
 	addonSummary = addon.manifest["summary"]
 	# add-on name has  changed. We must uninstall previous version.
 	uninstallPreviousVersion()
 	# save old configuration
 	userConfigPath = globalVars.appArgs.configPath
-	curConfigFileName = "%sAddon.ini"%addonName
+	curConfigFileName = "%sAddon.ini" % addonName
 	for fileName in [curConfigFileName, previousConfigFileName]:
-		f= os.path.join(userConfigPath, fileName)
+		f = os.path.join(userConfigPath, fileName)
 		if not os.path.exists(f):
 			continue
-		if gui.messageBox(
-			# Translators: the label of a message box dialog  to ask the user if he wants keep current configuration settings.
+		extraAppArgs = globalVars.appArgsExtra if hasattr(globalVars, "appArgsExtra") else globalVars.unknownAppArgs
+		keep = True if "addon-auto-update" in extraAppArgs else False
+		if keep or gui.messageBox(
+			# Translators: the label of a message box dialog
+			# to ask the user if he wants keep current configuration settings.
 			_("Do you want to keep current add-on configuration settings ?"),
 			# Translators: the title of a message box dialog.
-			_("%s - installation"%addonSummary),
-			wx.YES|wx.NO|wx.ICON_WARNING)==wx.YES:
-			try:
-				path = os.path.join(curPath, saveConfigFileName )
-				shutil.copy(f, path)
-				os.remove(f)
-				log.warning("%s file copied and deleted"%f)
-			except:
-				log.warning("Error: %s file cannot be copied or deleted"%f)
+			_("%s - installation" % addonSummary),
+			wx.YES | wx.NO | wx.ICON_WARNING) == wx.YES or gui.messageBox(
+				# Translators: the label of a message box dialog.
+				_("Are you sure you don't want to keep the current add-on configuration settings?"),
+				# Translators: the title of a message box dialog.
+				_("%s - installation") % addonSummary,
+				wx.YES | wx.NO | wx.ICON_WARNING) == wx.NO:
+			path = os.path.join(curPath, curConfigFileName)
+			saveFile(f, path)
 		break
 
+
+def deleteFile(theFile):
+	if not os.path.exists(theFile):
+		return
+	os.remove(theFile)
+	if os.path.exists(theFile):
+		log.warning("Error on deletion of%s  file" % theFile)
+	else:
+		log.warning("%s file deleted" % theFile)
+
+
 def deleteAddonConfig():
-	import os
 	import globalVars
-	from logHandler import log
 	import sys
 	curPath = os.path.dirname(__file__)
 	sys.path.append(curPath)
 	import buildVars
 	addonName = buildVars.addon_info["addon_name"]
 	del sys.path[-1]
-	configFile = os.path.join(globalVars.appArgs.configPath, "%sAddon.ini"%addonName)
-	if not os.path.exists(configFile):
-		return
-	os.remove(configFile )
-	if os.path.exists(configFile):
-		log.warning("Error on deletion of%s  file"%configFile)
-	else:
-		log.warning("%s file deleted"%configFile)
+	configFile = os.path.join(
+		globalVars.appArgs.configPath, "%sAddon.ini" % addonName)
+	deleteFile(configFile)
 
-	
+
 def onUninstall():
-	deleteAddonConfig(  )
-
+	deleteAddonConfig()

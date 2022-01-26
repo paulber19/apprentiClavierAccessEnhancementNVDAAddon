@@ -1,6 +1,6 @@
 # globalPlugins\apprentiClavierAccessEnhancement\ac_globalPlugin.py
 # a part of apprentiClavierAccessEnhancement add-on
-# Copyright (C) 2019 Paulber19
+# Copyright (C) 2019-2022 Paulber19
 # This file is covered by the GNU General Public License.
 
 
@@ -13,7 +13,7 @@ import sys
 addon = addonHandler.getCodeAddon()
 path = os.path.join(addon.path, "shared")
 sys.path.append(path)
-from ac_addonConfigManager import _addonConfigManager  # noqa:E402
+from ac_addonConfigManager import _addonConfigManager
 del sys.path[-1]
 addonHandler.initTranslation()
 
@@ -43,7 +43,7 @@ class ApprentiClavierGlobalPlugin(globalPluginHandler.GlobalPlugin):
 			else:
 				# for wxPython 3
 				self.preferencesMenu.RemoveItem(self.menu)
-		except:  # noqa:E722
+		except Exception:
 			pass
 
 	def terminate(self):

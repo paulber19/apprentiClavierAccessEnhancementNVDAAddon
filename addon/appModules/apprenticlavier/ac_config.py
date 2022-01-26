@@ -1,6 +1,6 @@
 # appModules\apprenticlavier\ac_config.py
 # a part of apprentiClavierAccessEnhancement add-on
-# Copyright (C) 2019-2021, Paulber19
+# Copyright (C) 2019-2022, Paulber19
 # This file is covered by the GNU General Public License.
 
 # Manages ApprentiClavier add-on configuration.
@@ -8,6 +8,7 @@ import addonHandler
 from logHandler import log
 import os
 import globalVars
+import config
 
 from configobj import ConfigObj, ConfigObjError
 from configobj.validate import Validator, VdtTypeError
@@ -109,8 +110,10 @@ DebitDictee19ConfSpec = """
 confspec = ConfigObj(StringIO(
 	""" #ApprentiClavier Configuration File
 {0}{1}{2}{3}{4}{5}{6}
-""".format(GeneralConfSpec, DebitGeneralConfSpec, DebitExplicationConfSpec, DebitLesson14ConfSpec, DebitLesson15ConfSpec, DebitDictee18ConfSpec, DebitDictee19ConfSpec)
-), list_values=False, encoding="UTF-8")
+""".format(
+		GeneralConfSpec, DebitGeneralConfSpec, DebitExplicationConfSpec, DebitLesson14ConfSpec,
+		DebitLesson15ConfSpec, DebitDictee18ConfSpec, DebitDictee19ConfSpec)),
+	list_values=False, encoding="UTF-8")
 confspec.newlines = "\r\n"
 
 #: The active configuration, C{None} if it has not yet been loaded.
@@ -146,8 +149,6 @@ def Load():
 		conf.filename = configFileName
 		# Translators: message to user to report parsing error.
 		configFileError = _("Error parsing ApprentiClavier configuration file: %s") % e
-
-	# Python converts \r\n to \n when reading files in Windows, so ConfigObj can't determine the true line ending.
 	conf.newlines = "\r\n"
 	val = Validator()
 	result = conf.validate(val)
@@ -161,7 +162,8 @@ def Save():
 	# We never want to save config if runing securely
 	if globalVars.appArgs.secure:
 		return
-	# We save the configuration, in case the user would not have checked the "Save configuration on exit" checkbox in General settings.
+	# We save the configuration, in case the user would not have checked the "Save configuration
+		# on exit" checkbox in General settings.
 	if not config.conf['general']['saveConfigurationOnExit']:
 		return
 	global conf
@@ -182,7 +184,7 @@ def Save():
 		return
 	try:
 		conf.write()
-	except:  # noqa:E722
+	except Exception:
 		log.warning("Could not save configuration - probably read only file system")
 
 

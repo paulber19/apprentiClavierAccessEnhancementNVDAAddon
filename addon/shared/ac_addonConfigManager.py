@@ -7,9 +7,11 @@ from logHandler import log
 import addonHandler
 import os
 import globalVars
+import wx
+import gui
+import config
 from configobj import ConfigObj
-from configobj.validate import Validator
-
+from configobj.validate import Validator, ValidateError
 from io import StringIO
 
 addonHandler.initTranslation()
@@ -21,6 +23,9 @@ SCT_General = "General"
 ID_ConfigVersion = "ConfigVersion"
 ID_AutoUpdateCheck = "AutoUpdateCheck"
 ID_UpdateReleaseVersionsToDevVersions = "UpdateReleaseVersionsToDevVersions"
+
+_curAddon = addonHandler.getCodeAddon()
+_addonName = _curAddon.manifest["name"]
 
 
 class BaseAddonConfiguration(ConfigObj):
@@ -38,13 +43,29 @@ class BaseAddonConfiguration(ConfigObj):
 		@param input: data to read the addon configuration information
 		@type input: a fie-like object.
 		"""
-		super(BaseAddonConfiguration, self).__init__(input, configspec=self.configspec, encoding='utf-8', default_encoding='utf-8')
+		super(BaseAddonConfiguration, self).__init__(
+			input, configspec=self.configspec, encoding='utf-8', default_encoding='utf-8')
 		self.newlines = "\r\n"
 		self._errors = []
 		val = Validator()
 		result = self.validate(val, copy=True, preserve_errors=True)
-		if not result:
-			self._errors = result
+		if type(result) == dict:
+			self._errors = self.getValidateErrorsText(result)
+		else:
+			self._errors = None
+
+	def getValidateErrorsText(self, result):
+		textList = []
+		for name, section in result.items():
+			if section is True:
+				continue
+			textList.append("section [%s]" % name)
+			for key, value in section.items():
+				if isinstance(value, ValidateError):
+					textList.append(
+						'key "{}": {}'.format(
+							key, value))
+		return "\n".join(textList)
 
 	@property
 	def errors(self):
@@ -57,7 +78,11 @@ class AddonConfiguration10(BaseAddonConfiguration):
 	{configVersion} = string(default = {version})
 	{autoUpdateCheck} = boolean(default=True)
 	{updateReleaseVersionsToDevVersions} = boolean(default=False)
-	""".format(section=SCT_General, configVersion=ID_ConfigVersion, version=_version, autoUpdateCheck=ID_AutoUpdateCheck, updateReleaseVersionsToDevVersions=ID_UpdateReleaseVersionsToDevVersions)
+	""".format(
+		section=SCT_General,
+		configVersion=ID_ConfigVersion,
+		version=_version, autoUpdateCheck=ID_AutoUpdateCheck,
+		updateReleaseVersionsToDevVersions=ID_UpdateReleaseVersionsToDevVersions)
 
 	#: The configuration specification
 	configspec = ConfigObj(StringIO(
@@ -71,59 +96,110 @@ class AddonConfigurationManager():
 	_currentConfigVersion = "1.0"
 	_versionToConfiguration = {
 		"1.0": AddonConfiguration10,
-		}
+	}
 
 	def __init__(self):
-		curAddon = addonHandler.getCodeAddon()
-		addonName = curAddon.manifest["name"]
-		self.configFileName = "%sAddon.ini" % addonName
+		self.configFileName = "%sAddon.ini" % _addonName
 		self.loadSettings()
+		config.post_configSave.register(self.handlePostConfigSave)
+
+	def warnConfigurationReset(self):
+		wx.CallLater(
+			100,
+			gui.messageBox,
+			# Translators: A message warning configuration reset.
+			_(
+				"The configuration file of the add-on contains errors. "
+				"The  configuration has been reset to factory defaults"),
+			# Translators: title of message box
+			"{addon} - {title}" .format(addon=_curAddon.manifest["summary"], title=_("Warning")),
+			wx.OK | wx.ICON_WARNING
+		)
 
 	def loadSettings(self):
-		addonConfigFile = os.path.join(globalVars.appArgs.configPath, self.configFileName)
-		configFileExists = False
+		addonConfigFile = os.path.join(
+			globalVars.appArgs.configPath, self.configFileName)
+		doMerge = True
 		if os.path.exists(addonConfigFile):
-			baseConfig = BaseAddonConfiguration(addonConfigFile)
-			if baseConfig[SCT_General][ID_ConfigVersion] != self._currentConfigVersion:
-				# old config file must not exist here. Must be deleted
+			# there is allready a config file
+			try:
+				baseConfig = BaseAddonConfiguration(addonConfigFile)
+				if baseConfig.errors:
+					e = Exception("Error parsing configuration file:\n%s" % baseConfig.errors)
+					raise e
+				if baseConfig[SCT_General][ID_ConfigVersion] != self._currentConfigVersion:
+					# it's an old config, but old config file must not exist here.
+					# Must be deleted
+					os.remove(addonConfigFile)
+					log.warning(
+						"%s: Old configuration version found. Config file is removed: %s" % (_addonName, addonConfigFile))
+				else:
+					# it's the same version of config, so no merge
+					doMerge = False
+			except Exception as e:
+				log.warning(e)
+				# error on reading config file, so delete it
 				os.remove(addonConfigFile)
-				log.warning(" Old config file removed")
-			else:
-				configFileExists = True
-		self.addonConfig = self._versionToConfiguration[self._currentConfigVersion](addonConfigFile)
-		if self.addonConfig.errors != []:
-			log.warning("Addon configuration file error")
-			self.addonConfig = None
-			return
-		curPath = addonHandler.getCodeAddon().path
-		oldConfigFileName = "addonConfig_old.ini"
-		oldConfigFile = os.path.join(curPath,  oldConfigFileName)
+				self.warnConfigurationReset()
+				log.warning(
+					"%s Addon configuration file error: configuration reset to factory defaults" % _addonName)
+
+		if os.path.exists(addonConfigFile):
+			self.addonConfig =\
+				self._versionToConfiguration[self._currentConfigVersion](addonConfigFile)
+			if self.addonConfig.errors:
+				log.warning(self.addonConfig.errors)
+				log.warning(
+					"%s Addon configuration file error: configuration reset to factory defaults" % _addonName)
+				os.remove(addonConfigFile)
+				self.warnConfigurationReset()
+				# reset configuration to factory defaults
+				self.addonConfig =\
+					self._versionToConfiguration[self._currentConfigVersion](None)
+				self.addonConfig.filename = addonConfigFile
+				doMerge = False
+		else:
+			# no add-on configuration file found
+			self.addonConfig =\
+				self._versionToConfiguration[self._currentConfigVersion](None)
+			self.addonConfig.filename = addonConfigFile
+		# merge step
+		oldConfigFile = os.path.join(_curAddon.path, self.configFileName)
 		if os.path.exists(oldConfigFile):
-			if not configFileExists:
+			if doMerge:
 				self.mergeSettings(oldConfigFile)
-				self.saveSettings()
 			os.remove(oldConfigFile)
-		if not configFileExists:
-			self.saveSettings()
+		if not os.path.exists(addonConfigFile):
+			self.saveSettings(True)
 
-	def mergeSettings(self, oldConfigFile):
-		log.warning("Merge settings with old configuration")
-		baseConfig = BaseAddonConfiguration(oldConfigFile)
-		version = baseConfig[SCT_General][ID_ConfigVersion]
-		if version not in self._versionToConfiguration:
-			log.warning("Configuration merge error: unknown configuration version")
+	def mergeSettings(self, previousConfigFile):
+		baseConfig = BaseAddonConfiguration(previousConfigFile)
+		previousVersion = baseConfig[SCT_General][ID_ConfigVersion]
+		if previousVersion not in self._versionToConfiguration:
+			log.warning("%s: Configuration merge error: unknown previous configuration version number" % _addonName)
 			return
-		oldConfig = self._versionToConfiguration[version](oldConfigFile)
-		for sect in self.addonConfig.sections:
-			for k in self.addonConfig[sect]:
-				if sect == SCT_General and k == ID_ConfigVersion:
-					continue
-				if sect in oldConfig.sections and k in oldConfig[sect]:
-					self.addonConfig[sect][k] = oldConfig[sect][k]
+		previousConfig = self._versionToConfiguration[previousVersion](previousConfigFile)
+		if previousVersion == self.addonConfig[SCT_General][ID_ConfigVersion]:
+			# same config version, update data from previous config
+			self.addonConfig.update(previousConfig)
+			log.warning(
+				"%s: Configuration updated with previous configuration file" % _addonName)
+			return
+		# different config version, so do a  merge with previous config.
+		try:
+			self.addonConfig.mergeWithPreviousConfigurationVersion(previousConfig)
+		except Exception:
+			pass
 
-	def saveSettings(self):
+	def saveSettings(self, force=False):
 		# We never want to save config if runing securely
 		if globalVars.appArgs.secure:
+			return
+		# We save the configuration, in case the
+			# user would not have checked the "Save configuration on exit checkbox
+			# in General settings or force is is True
+		if not force and (
+			not config.conf['general']['saveConfigurationOnExit']):
 			return
 		if self.addonConfig is None:
 			return
@@ -131,8 +207,12 @@ class AddonConfigurationManager():
 			val = Validator()
 			self.addonConfig.validate(val, copy=True)
 			self.addonConfig.write()
-		except:  # noqa:E722
-			log.warning("Could not save configuration - probably read only file system")
+			log.warning("%s: configuration saved" % _addonName)
+		except Exception:
+			log.warning("%s: Could not save configuration - probably read only file system" % _addonName)
+
+	def handlePostConfigSave(self):
+		self.saveSettings(True)
 
 	def terminate(self):
 		self.saveSettings()

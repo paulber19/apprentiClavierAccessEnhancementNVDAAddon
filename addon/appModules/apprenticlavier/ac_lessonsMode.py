@@ -1,6 +1,6 @@
 # appModules\apprenticlavier\ac_lessonsMode.py
 # a part of apprentiClavierAccessEnhancement add-on
-# Copyright (C) 2019-2020, Paulber19
+# Copyright (C) 2019-2022, Paulber19
 # This file is covered by the GNU General Public License.
 
 
@@ -68,4 +68,4 @@ lessonToMode = {
 	"18d": MODE_DICTEE_N2,
 	"18e": MODE_MOT,
 	"19": MODE_DICTEE_N2
-	}
+}

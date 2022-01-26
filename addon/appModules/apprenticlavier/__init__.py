@@ -1,12 +1,14 @@
 # -*- coding: iso-8859-15 -*-
 # appModules\aprenticlavier\___init__.py
 # a part of apprentiClavierAccessEnhancement add-on
-# Copyright (C) 2019-2021, Paulber19
+# Copyright (C) 2019-2022, Paulber19
 # This file is covered by the GNU General Public License.
 
 import addonHandler
 from logHandler import log
+import os
 import globalVars
+import time
 import appModuleHandler
 try:
 	# for nvda version >= 2021.2
@@ -22,17 +24,31 @@ from keyboardHandler import KeyboardInputGesture
 from NVDAObjects.window import Window, DisplayModelEditableText
 from NVDAObjects.window.edit import UnidentifiedEdit
 from editableText import EditableText
-from oleacc import *  # noqa:F403
 from IAccessibleHandler import accNavigate
 import config
 try:
 	# for nvda version >= 2021.2
 	from controlTypes.state import State
-	STATE_INVISIBLE  = State.INVISIBLE 
+	STATE_INVISIBLE = State.INVISIBLE
 except ImportError:
 	from controlTypes import STATE_INVISIBLE
+from oleacc import (
+	STATE_SYSTEM_INVISIBLE,
+	NAVDIR_PREVIOUS,
+	NAVDIR_LASTCHILD,
+)
 from . import ac_voiceControl
-from .ac_lessonsMode import *  # noqa:F403
+from .ac_lessonsMode import (
+	EXERCICES_LESSON_IDENTIFIER,
+	lessonToMode,
+	MODE_TOUCHE,
+	MODE_TOUCHE_N1,
+	MODE_TOUCHE_N2,
+	MODE_MOT,
+	MODE_DICTEE_N1,
+	MODE_DICTEE_N2,
+	MODE_DICTEE_N3
+)
 addon = addonHandler.getCodeAddon()
 
 addonHandler.initTranslation()
@@ -52,14 +68,15 @@ GB_inGetTopLevelFunction = 0
 score_keyHelp_timer = {
 	# lesson: score, f2 key help timer, timer
 	"1a,1B,1c,1d": (2, 5, -1),
-	"99a,2a,2b,2c,2e,3a,3b,4a,4b,4c,4d,4e,4f,4g,4h,5a,5b,5c,8b,8c,8d,8e,8f,8h,9a,9b,9c,9d,10a,10b,10c,13g,16a,16c,17a,18a,18b,18c,18e": (1, 4, -1),
+	"99a,2a,2b,2c,2e,3a,3b,4a,4b,4c,4d,4e,4f,4g,4h,5a,5b,5c,8b,8c,8d,8e,8f,8h,9a,9b,9c,9d,10a,10b,10c,13g,"
+	"16a,16c,17a,18a,18b,18c,18e": (1, 4, -1),
 	"2d,2f,2g,2h,3c": (3, 6, -1),
 	"6a,6b,6c,6d": (4, 5, 3),
 	"7a,7b,7c,11a,11b,11c,18d": (3, 5, 3),
 	"8a,12a,12b,12c,12d,13a,13b,13c,16b,16d": (2, 5, -1),
 	"8g,13d,13e,13f,17b,17c,17d": (2, 6, -1),
 	"14a,14b,14c,15a,15b,15c,19a,19b,19c,19d": (2, 4, -1)
-	}
+}
 
 
 def printDebug(text):
@@ -89,7 +106,7 @@ def GetTopLevelObject(obj=None):
 			o = o.parent
 			if o.name and o.name.lower() == "bureau":
 				o = None
-		except:  # noqa:E722
+		except Exception:
 			printDebug("getTopLevelObject: no parent")
 			o = None
 	GB_inGetTopLevelFunction -= 1
@@ -110,13 +127,13 @@ def GetObjectId(obj):
 	i = 0
 	try:
 		o = obj.IAccessibleObject.accParent
-	except:  # noqa:E722
+	except Exception:
 		return 0
 	while o is not None:
-		i = i+1
+		i = i + 1
 		try:
 			(o, childID) = accNavigate(o, 0, NAVDIR_PREVIOUS)
-		except:  # noqa:E722
+		except Exception:
 			o = None
 
 	return i
@@ -192,10 +209,10 @@ def getLessonMode(obj, sATaper=""):
 		return 0
 	try:
 		mode = lessonToMode[num]
-	except:  # noqa:E722
+	except Exception:
 		try:
 			mode = lessonToMode["".join((num, letter.lower()))]
-		except:  # noqa:E722
+		except Exception:
 			mode = 0
 
 	return mode
@@ -205,7 +222,7 @@ def getATaperInfos():
 	try:
 		oForeground = api.getTopLevelObject().IAccessibleObject
 		(o, childId) = accNavigate(oForeground, 0, NAVDIR_LASTCHILD)
-	except:  # noqa:E722
+	except Exception:
 		return ""
 	if o.accState(0) & STATE_SYSTEM_INVISIBLE:
 		printDebug("getATAperInfo sans info")
@@ -239,7 +256,7 @@ def getATaperAndDejaTapeControlID():
 	o = oDeb.lastChild
 	if o:
 		controlID = o.windowControlID
-		return (controlID, controlID-1)
+		return (controlID, controlID - 1)
 	return (-1, -1)
 
 
@@ -268,7 +285,8 @@ class InPageWindow(WindowEx):
 		global GB_timer
 		controlID = self.windowControlID
 		objID = GetObjectId(self)
-		printDebug("In event_valueChange InPageWindow controlID %s, objID %s, role %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("In event_valueChange InPageWindow controlID %s, objID %s, role %s, value %s" % (
+			controlID, objID, self.role, self.value))
 		StopTimer()
 		GB_timer = wx.CallLater(100, SayValue, self.value)
 		printDebug("Out event_valueChange InPageWindow")
@@ -277,7 +295,8 @@ class InPageWindow(WindowEx):
 		global GB_timer
 		controlID = self.windowControlID
 		objID = GetObjectId(self)
-		printDebug("In event_gainFocus InPageWindow controlID %s, objID %s, role %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("In event_gainFocus InPageWindow controlID %s, objID %s, role %s, value %s" % (
+			controlID, objID, self.role, self.value))
 		if api.getFocusDifferenceLevel() == 1:
 			SayValue(api.getForegroundObject().name)
 		StopTimer()
@@ -293,7 +312,8 @@ class InAideMemoireWindow(WindowEx):
 		global GB_timer
 		controlID = self.windowControlID
 		objID = GetObjectId(self)
-		printDebug("In event_valueChange InAideMemoireWindow controlID %s, objID %s, role %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("In event_valueChange InAideMemoireWindow controlID %s, objID %s, role %s, value %s" % (
+			controlID, objID, self.role, self.value))
 		if controlID == 3:
 			# eviter la repetition
 			StopTimer(GB_timer)
@@ -304,7 +324,8 @@ class InAideMemoireWindow(WindowEx):
 	def event_gainFocus(self):
 		controlID = self.windowControlID
 		objID = GetObjectId(self)
-		printDebug("In event_gainFocus InAideMemoireWindow controlID %s, objID %s, role %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("In event_gainFocus InAideMemoireWindow controlID %s, objID %s, role %s, value %s" % (
+			controlID, objID, self.role, self.value))
 		speech.cancelSpeech()
 		if controlID == 0:
 			pass
@@ -319,7 +340,8 @@ class InOtherWindow(Window):
 		global GB_timer
 		controlID = self.windowControlID
 		objID = GetObjectId(self)
-		printDebug("In event_valueChange InOtherWindow controlID %s, objID %s, role %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("In event_valueChange InOtherWindow controlID %s, objID %s, role %s, value %s" % (
+			controlID, objID, self.role, self.value))
 		if self.value is not None and len(self.value) or controlID == 5:
 			StopTimer(GB_timer)
 		GB_timer = wx.CallLater(200, SayValue, self.value)
@@ -329,7 +351,8 @@ class InOtherWindow(Window):
 		global GB_timer
 		controlID = self.windowControlID
 		objID = GetObjectId(self)
-		printDebug("In event_gainFocus InOtherWindow controlID %s, objID %s, role %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("In event_gainFocus InOtherWindow controlID %s, objID %s, role %s, value %s" % (
+			controlID, objID, self.role, self.value))
 		if controlID == 5:
 			StopTimer(GB_timer)
 		GB_timer = wx.CallLater(200, SayValue, self.value)
@@ -350,13 +373,15 @@ class InBienvenueWindow(Window):
 	def event_caret(self):
 		objID = GetObjectId(self)
 		controlID = self.windowControlID
-		printDebug("In event_caret InBienvenueWindow controlID %s, objID %s, role %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("In event_caret InBienvenueWindow controlID %s, objID %s, role %s, value %s" % (
+			controlID, objID, self.role, self.value))
 		# super(InBienvenueWindow, self).event_caret()
 
 	def event_valueChange(self):
 		objID = GetObjectId(self)
 		controlID = self.windowControlID
-		printDebug("In event_valueChange InBienvenueWindow controlID %s, objID %s, role %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("In event_valueChange InBienvenueWindow controlID %s, objID %s, role %s, value %s" % (
+			controlID, objID, self.role, self.value))
 		if (self.value is None) or (len(self.value) == 0):
 			pass
 
@@ -371,7 +396,8 @@ class InBienvenueWindow(Window):
 	def event_gainFocus(self):
 		objID = GetObjectId(self)
 		controlID = self.windowControlID
-		printDebug("In event_gainFocus InBienvenueWindow controlID %s, objID %s, role %s,value %s" % (controlID, objID, self.role, self.value))
+		printDebug("In event_gainFocus InBienvenueWindow controlID %s, objID %s, role %s,value %s" % (
+			controlID, objID, self.role, self.value))
 		if controlID == 7:
 			SayValue(u"taper votre nom, ou simplement Entrée")
 			ui.message(self.value)
@@ -405,7 +431,8 @@ class InLessonWindow(Window):
 		if controlID in [2, 3]:
 			return
 
-		printDebug("in event_valueChange InLessonWindow controlID %s, objID %s, role %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("in event_valueChange InLessonWindow controlID %s, objID %s, role %s, value %s" % (
+			controlID, objID, self.role, self.value))
 		# affichage aide sur la touche avec  touche f2
 		if controlID == 4 and objID in [2, 3, 4]\
 			or controlID == 6 and objID == 2:
@@ -437,7 +464,8 @@ class InLessonWindow(Window):
 		global GB_timer
 		controlID = self.windowControlID
 		objID = GetObjectId(self)
-		printDebug("in event_gainFocus InLessonWindow controlID %s, objID %s, role  %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("in event_gainFocus InLessonWindow controlID %s, objID %s, role  %s, value %s" % (
+			controlID, objID, self.role, self.value))
 
 		if controlID == 0:
 			pass
@@ -455,7 +483,7 @@ class InLessonWindow(Window):
 		try:
 			oForeground = api.getForegroundObject().IAccessibleObject
 			(o, childId) = accNavigate(oForeground, 0, NAVDIR_LASTCHILD)
-		except:  # noqa:E722
+		except Exception:
 			return
 		if o.accState(0) & STATE_SYSTEM_INVISIBLE:
 			printDebug("getInfo sans info")
@@ -473,7 +501,7 @@ class InLessonWindow(Window):
 		try:
 			(o, childId) = accNavigate(o, 0, NAVDIR_PREVIOUS)
 			(o2, childId) = accNavigate(o, 0, NAVDIR_LASTCHILD)
-		except:  # noqa:E722
+		except Exception:
 			printDebug("error 1, no object")
 			return ("", "", "", "", "")
 		sDejaTapee = o2.accValue(0)
@@ -502,7 +530,8 @@ class InLessonWindow(Window):
 		objID = GetObjectId(self)
 		StopTimer(GB_timer)
 		(sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant) = self.GetInfos()
-		printDebug("DireInfos ATaper %s, DejaTapee %s, ResteAtaper %s, Mot %s, Caractere %s" % (sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant))
+		printDebug("DireInfos ATaper %s, DejaTapee %s, ResteAtaper %s, Mot %s, Caractere %s" % (
+			sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant))
 		if sATaper == "":
 			printDebug("direInfo sans info")
 			return
@@ -531,7 +560,7 @@ class InLessonWindow(Window):
 				SayText("", sMotCourant, sCaractereCourant)
 
 			else:
-				SayText("",  "", sCaractereCourant)
+				SayText("", "", sCaractereCourant)
 		# dictee
 		elif mode in [MODE_DICTEE_N1, MODE_DICTEE_N2]:
 			# apres une erreur de frappe , dire le caractere a taper
@@ -591,7 +620,8 @@ class InLessonByKeyWindow(Window):
 		objID = GetObjectId(self)
 		controlID = self.windowControlID
 		(scoreControlID, keyHelpControlID) = getScoreAndKeyHelpControlID(self)
-		printDebug("in event_valueChange InLessonByKeyWindow controlID %s, objID %s , role %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("in event_valueChange InLessonByKeyWindow controlID %s, objID %s , role %s, value %s" % (
+			controlID, objID, self.role, self.value))
 		# ne pas dire le timer
 		if self.windowClassName == "ThunderRTTimer":
 			pass
@@ -612,7 +642,8 @@ class InLessonByKeyWindow(Window):
 		global GB_timer
 		controlID = self.windowControlID
 		objID = GetObjectId(self)
-		printDebug("in event_gainFocus InLessonByKeyWindow controlID %s, objID %s, role  %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("in event_gainFocus InLessonByKeyWindow controlID %s, objID %s, role  %s, value %s" % (
+			controlID, objID, self.role, self.value))
 
 		if controlID == 0:
 			return
@@ -623,7 +654,7 @@ class InLessonByKeyWindow(Window):
 		try:
 			oForeground = GetTopLevelObject(self).children[3].IAccessibleObject
 			(o, childId) = accNavigate(oForeground, 0, NAVDIR_LASTCHILD)
-		except:  # noqa:E722
+		except Exception:
 			return
 		if o.accState(0) & STATE_SYSTEM_INVISIBLE:
 			printDebug("getInfo sans info")
@@ -641,7 +672,7 @@ class InLessonByKeyWindow(Window):
 		try:
 			(o, childId) = accNavigate(o, 0, NAVDIR_PREVIOUS)
 			(o2, childId) = accNavigate(o, 0, NAVDIR_LASTCHILD)
-		except:  # noqa:E722
+		except Exception:
 			printDebug("error 1, no object")
 			return ("", "", "", "", "")
 		sDejaTapee = o2.accValue(0)
@@ -692,7 +723,8 @@ class InLessonByKeyWindow(Window):
 		if not res:
 			return
 		(sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant) = res
-		printDebug("DireInfos ATaper %s, DejaTapee %s, ResteAtaper %s, Mot %s, Caractere %s" % (sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant))
+		printDebug("DireInfos ATaper %s, DejaTapee %s, ResteAtaper %s, Mot %s, Caractere %s" % (
+			sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant))
 		if sATaper == "":
 			printDebug("direInfo sans info")
 			return
@@ -720,7 +752,8 @@ class InLessonByKeyWindow_1(InLessonByKeyWindow):
 		objID = GetObjectId(self)
 		controlID = self.windowControlID
 		(scoreControlID, keyHelpControlID) = getScoreAndKeyHelpControlID(self)
-		printDebug("in event_valueChange InLessonByKeyWindow_1 controlID %s, objID %s , role %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("in event_valueChange InLessonByKeyWindow_1 controlID %s, objID %s , role %s, value %s" % (
+			controlID, objID, self.role, self.value))
 
 		# utiliser la mise à jour du score pour repeter la touche en cas d'erreur
 		if controlID == scoreControlID:
@@ -745,7 +778,8 @@ class InLessonByKeyWindow_2(InLessonByKeyWindow):
 		if controlID == scoreControlID:
 			pass
 			return
-		printDebug("in event_valueChange InLessonByKeyWindow_2 controlID %s, objID %s , role %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("in event_valueChange InLessonByKeyWindow_2 controlID %s, objID %s , role %s, value %s" % (
+			controlID, objID, self.role, self.value))
 		# suite papui touche f2 pour avoir aide sur la touche
 		if controlID == keyHelpControlID:
 			StopTimer(GB_timer)
@@ -766,7 +800,8 @@ class InLessonByWordWindow(Window):
 		global GB_timer, GB_precObjID
 		objID = GetObjectId(self)
 		controlID = self.windowControlID
-		printDebug("in event_valueChange InLessonByWordWindow controlID %s, objID %s , role %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("in event_valueChange InLessonByWordWindow controlID %s, objID %s , role %s, value %s" % (
+			controlID, objID, self.role, self.value))
 		(aTaperControlID, dejaTapeControlID) = getATaperAndDejaTapeControlID()
 		(scoreControlID, keyHelpControlID) = getScoreAndKeyHelpControlID(self)
 
@@ -787,7 +822,8 @@ class InLessonByWordWindow(Window):
 		global GB_timer
 		controlID = self.windowControlID
 		objID = GetObjectId(self)
-		printDebug("in event_gainFocus InLessonByWordWindow controlID %s, objID %s, role  %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("in event_gainFocus InLessonByWordWindow controlID %s, objID %s, role  %s, value %s" % (
+			controlID, objID, self.role, self.value))
 		# SayValue(self.windowText)
 		printDebug("out event_gainFocus InLessonByWordWindow")
 
@@ -803,7 +839,7 @@ class InLessonByWordWindow(Window):
 		try:
 			oForeground = api.getForegroundObject().IAccessibleObject
 			(o, childId) = accNavigate(oForeground, 0, NAVDIR_LASTCHILD)
-		except:  # noqa:E722
+		except Exception:
 			return
 		if o.accState(0) & STATE_SYSTEM_INVISIBLE:
 			printDebug("getInfo sans info")
@@ -821,7 +857,7 @@ class InLessonByWordWindow(Window):
 		try:
 			(o, childId) = accNavigate(o, 0, NAVDIR_PREVIOUS)
 			(o2, childId) = accNavigate(o, 0, NAVDIR_LASTCHILD)
-		except:  # noqa:E722
+		except Exception:
 			printDebug("error 1, no object")
 			return ("", "", "", "", "")
 		sDejaTapee = o2.accValue(0)
@@ -851,7 +887,8 @@ class InLessonByWordWindow(Window):
 		if not res:
 			return
 		(sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant) = res
-		printDebug("DireInfos ATaper %s, DejaTapee %s, ResteAtaper %s, Mot %s, Caractere %s" % (sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant))
+		printDebug("DireInfos ATaper %s, DejaTapee %s, ResteAtaper %s, Mot %s, Caractere %s" % (
+			sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant))
 		if sATaper == "":
 			printDebug("direInfo sans info")
 			return
@@ -952,7 +989,8 @@ class InLessonDictationWindow(Window):
 		# ne pas dire le timer, ni le scor
 		if self.windowClassName == "ThunderRTTimer" or controlID == scoreControlID:
 			return
-		printDebug("in event_valueChange InLessonDictationWindow controlID %s, objID %s , role %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("in event_valueChange InLessonDictationWindow controlID %s, objID %s , role %s, value %s" % (
+			controlID, objID, self.role, self.value))
 		# suite papui touche f2 pour avoir aide sur la touche
 		if controlID == keyHelpControlID:
 			StopTimer(GB_timer)
@@ -972,7 +1010,8 @@ class InLessonDictationWindow(Window):
 		global GB_timer
 		controlID = self.windowControlID
 		objID = GetObjectId(self)
-		printDebug("in event_gainFocus InLessonDictationWindow controlID %s, objID %s, role  %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("in event_gainFocus InLessonDictationWindow controlID %s, objID %s, role  %s, value %s" % (
+			controlID, objID, self.role, self.value))
 		# SayValue(self.windowText)
 		printDebug("out event_gainFocus InLesssonDictationWindow")
 
@@ -980,7 +1019,7 @@ class InLessonDictationWindow(Window):
 		try:
 			oForeground = api.getForegroundObject().IAccessibleObject
 			(o, childId) = accNavigate(oForeground, 0, NAVDIR_LASTCHILD)
-		except:  # noqa:E722
+		except Exception:
 			return
 		if o.accState(0) & STATE_SYSTEM_INVISIBLE:
 			printDebug("getInfo sans info")
@@ -992,13 +1031,15 @@ class InLessonDictationWindow(Window):
 		sATaper = o1.accValue(0)
 		if sATaper is None:
 			printDebug(" getInfo pas d'info a taper")
+			global GB_precObjID
+			objID = GetObjectId(self)
 			GB_precObjID = objID
 			return ("", "", "", "", "")
 		sATaper = sATaper.strip(u" ")
 		try:
 			(o, childId) = accNavigate(o, 0, NAVDIR_PREVIOUS)
 			(o2, childId) = accNavigate(o, 0, NAVDIR_LASTCHILD)
-		except:  # noqa:E722
+		except Exception:
 			printDebug("error 1, no object")
 			return ("", "", "", "", "")
 		sDejaTapee = o2.accValue(0)
@@ -1029,7 +1070,8 @@ class InLessonDictationWindow(Window):
 		if not res:
 			return
 		(sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant) = res
-		printDebug("DireInfos ATaper %s, DejaTapee %s, ResteAtaper %s, Mot %s, Caractere %s" % (sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant))
+		printDebug("DireInfos ATaper %s, DejaTapee %s, ResteAtaper %s, Mot %s, Caractere %s" % (
+			sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant))
 		if sATaper == "":
 			printDebug("direInfo sans info")
 			return
@@ -1122,7 +1164,8 @@ class InLessonDictationWindow_1(InLessonDictationWindow):
 		# ne pas dire le timer
 		if controlID in [1, 3]:
 			return
-		printDebug("in event_valueChange InLessonDictationWindow_1 controlID %s, objID %s , role %s, value %s" % (controlID, objID, self.role, self.value))
+		printDebug("in event_valueChange InLessonDictationWindow_1 controlID %s, objID %s , role %s, value %s" % (
+			controlID, objID, self.role, self.value))
 		# suite papui touche f2 pour avoir aide sur la touche
 		if controlID == 5:
 			StopTimer(GB_timer)
@@ -1145,7 +1188,8 @@ class InLessonDictationWindow_1(InLessonDictationWindow):
 		if not res:
 			return
 		(sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant) = res
-		printDebug("DireInfos ATaper %s, DejaTapee %s, ResteAtaper %s, Mot %s, Caractere %s" % (sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant))
+		printDebug("DireInfos ATaper %s, DejaTapee %s, ResteAtaper %s, Mot %s, Caractere %s" % (
+			sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant))
 		if sATaper == "":
 			printDebug("direInfo sans info")
 			return
@@ -1275,7 +1319,8 @@ class AppModule(appModuleHandler.AppModule):
 
 	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
 		global GB_moduleHasFocus, GB_inGetTopLevelFunction
-		printDebug("choose overlayclass in,name= %s, controlID= %s, class= %s,role= %s" % (obj.name, obj.windowControlID, obj.windowClassName, obj.role))
+		printDebug("choose overlayclass in,name= %s, controlID= %s, class= %s,role= %s" % (
+			obj.name, obj.windowControlID, obj.windowClassName, obj.role))
 		cls = "inchangee"
 		if GB_inGetTopLevelFunction > 0:
 			return
@@ -1367,7 +1412,8 @@ class AppModule(appModuleHandler.AppModule):
 				time.sleep(0.5)
 				api.processPendingEvents()
 			return
-		# positionne le debit vocal , les ponctuations et l'echo caractere suivant le titre et le contenu de la fenetre
+		# positionne le debit vocal , les ponctuations et l'echo caractere suivant le titre
+			# et le contenu de la fenetre
 		ac_voiceControl.updateSettings(obj)
 		if obj.name is not None:
 			name = obj.name.lower()
@@ -1401,7 +1447,8 @@ class AppModule(appModuleHandler.AppModule):
 		printDebug("out event_gainfocus appModule")
 
 	def event_valueChange(self, obj, nextHandler):
-		printDebug("in  event_valueChange appModule: name= %s, role= %s, value = %s" % (obj.name, obj.role, obj.value))
+		printDebug("in  event_valueChange appModule: name= %s, role= %s, value = %s" % (
+			obj.name, obj.role, obj.value))
 		nextHandler()
 
 	def script_DireLeCaractere(self, gesture):
@@ -1456,4 +1503,4 @@ class AppModule(appModuleHandler.AppModule):
 		"kb:control+space": "RepeterLeMot",
 		"kb:alt+space": "EpelerLeMot",
 		"kb:shift+space": "DireLeReste"
-		}
+	}

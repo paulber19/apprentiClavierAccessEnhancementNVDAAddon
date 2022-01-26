@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-15 -*-
 # appModules\apprenticlavier\ac_voiceControl.py
 # a part of apprentiClavierAccessEnhancement add-on
-# Copyright (C) 2019- 2021, Paulber19
+# Copyright (C) 2019- 2022, Paulber19
 # This file is covered by the GNU General Public License.
 
 
@@ -21,10 +21,10 @@ import api
 try:
 	# for nvda version >= 2021.2
 	from controlTypes.state import State
-	STATE_CHECKED  = State.CHECKED 
+	STATE_CHECKED = State.CHECKED
 except ImportError:
 	import controlTypes
-	STATE_CHECKED  = controlTypes.STATE_CHECKED 
+	STATE_CHECKED = controlTypes.STATE_CHECKED
 from . import ac_config
 
 addonHandler.initTranslation()
@@ -44,7 +44,7 @@ def getUserOptions():
 	try:
 		oOptions = obj.children[2].children[1].firstChild
 		o = oOptions.children[1]
-	except:  # noqa:E722
+	except Exception:
 		log.warning("Menu options not available")
 		return
 
@@ -58,7 +58,7 @@ def getUserOptions():
 				GB_userOptions[o.name] = state
 
 			o = o.next
-		except:  # noqa:E722
+		except Exception:
 			o = None
 
 
@@ -72,7 +72,7 @@ class SpeedRateVoiceControl(object):
 			try:
 				# for nvda version upper 2019.1.1
 				id = setting.setting.id
-			except:  # noqa:E722
+			except Exception:
 				# for nvda version lower 2019.2
 				id = setting.setting.name
 			if id == "rate":
@@ -112,14 +112,14 @@ class VoiceControl:
 		# OffExpli-OffsetGen sont utilisés par les options "Debit Explications" et "Debit General".
 		# il sont definis dans le fichier de configuration en pourcentage
 		delta = maxSpeed - self.userSpeed
-		self.OffGen = (delta*ac_config.getDebitGeneralOffset())/100
-		self.OffExpli = (delta*ac_config.getDebitExplicationOffset())/100
-		self.offDictee14 = (delta * ac_config.getDebitDictee14Offset())/100
-		self.offDictee15 = (delta*ac_config.getDebitDictee15Offset()) / 100
-		self.offDictee18 = (delta*ac_config.getDebitDictee18Offset())/100
+		self.OffGen = (delta * ac_config.getDebitGeneralOffset()) / 100
+		self.OffExpli = (delta * ac_config.getDebitExplicationOffset()) / 100
+		self.offDictee14 = (delta * ac_config.getDebitDictee14Offset()) / 100
+		self.offDictee15 = (delta * ac_config.getDebitDictee15Offset()) / 100
+		self.offDictee18 = (delta * ac_config.getDebitDictee18Offset()) / 100
 		(self.offDictee19, self.incDictee19) = ac_config.getDebitDictee19OffsetAndIncrement()
-		self.offDictee19 = (delta*self.offDictee19)/100
-		self.incDictee19 = (delta*self.incDictee19)/100
+		self.offDictee19 = (delta * self.offDictee19) / 100
+		self.incDictee19 = (delta * self.incDictee19) / 100
 		# echo caractere et Peu de ponctuations en entrant dans ApprentiClavier
 		self.setTypingEcho(1)
 		self.setPunctuationLevel(1)
@@ -143,7 +143,8 @@ class VoiceControl:
 		self.speedRateVoiceControl.setValue(self.setting["speedRate"])
 
 	def setOffsetGenEtExpliCourants(self, windowName):
-		# on retrouve les options debit general et debit explication avec le titre des fenetres menu principal et sous menu menu lecon
+		# on retrouve les options debit general et debit explication avec le titre des fenetres menu principal
+		# et sous menu menu lecon
 		# comme suit:
 		# si titre = "Normal." ou titre commence psans blanc: debit explication normal
 		# si titre  = "Rapide." ou il commence par 3 blanc: debit explication rapide
