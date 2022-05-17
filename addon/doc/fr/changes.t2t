@@ -17,10 +17,12 @@ Téléchargement:
 - [versions de développement ADDON_DEV_URL]
 
 
++ 1.8 (17/05/2022) +
+-  correction de l'impossibilité de voir l'historique  de l'extension.
 
 
 + 1.7 (26/01/2022) +
--compatibilité  avec NVDA 2022.1.
+- compatibilité  avec NVDA 2022.1.
 - réinitialisation de la configuration en cas d'erreurs dans le fichier de configuration.
 
 

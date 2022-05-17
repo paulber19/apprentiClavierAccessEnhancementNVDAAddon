@@ -15,8 +15,14 @@ Download:
 - [current stable version: ADDON_CUR_VERSION ADDON_DOWNLOAD_SERVER1]
 - [previous stable version: ADDON_PREV_VERSION ADDON_DOWNLOAD_PREVIOUS]
 - [development versions: ADDON_DEV_URL]
+
+
++ 1.8 (05/17/2022) +
+- fixed inability to see add-on history.
+
+
 + 1.7 (01/26/2022) +
--compatibility with NVDA 2022.1.
+- compatibility with NVDA 2022.1.
 - reset the configuration in the event of errors in the configuration file.
 
 

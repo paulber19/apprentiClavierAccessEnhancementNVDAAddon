@@ -14,5 +14,5 @@ Provide voice assistance  to ApprentiClavier keyboard learner (french version an
 
 Compatible and Tested with ApprentiClavier french version 1.0.9  and 1.0.10.
 
-[1]: https://rawgit.com/paulber007/AllMyNVDAAddons/master/apprentiClavierAccessEnhancement/apprentiClavierAccessEnhancement-1.7.nvda-addon
+[1]: https://rawgit.com/paulber007/AllMyNVDAAddons/master/apprentiClavierAccessEnhancement/apprentiClavierAccessEnhancement-1.8.nvda-addon
 [2]: https://github.com/paulber007/AllMyNVDAAddons/tree/master/apprentiClavierAccessEnhancement/dev
