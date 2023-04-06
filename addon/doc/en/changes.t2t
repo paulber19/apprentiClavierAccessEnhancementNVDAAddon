@@ -17,9 +17,11 @@ Download:
 - [development versions: ADDON_DEV_URL]
 
 
++ 1.10 (10/04/2023) +
+Fixed NVDA 2023.1 crashing when launching Keyboard Learner: compatibility issue caused by changing NVDA keymap.
+
 + 1.9 (February/02/2023) +
 Compatibilité with NVDA 2023.1
-
 
 + 1.8 (05/17/2022) +
 - fixed inability to see add-on history.

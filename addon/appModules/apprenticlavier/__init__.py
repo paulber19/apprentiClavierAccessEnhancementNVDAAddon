@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-15 -*-
 # appModules\aprenticlavier\___init__.py
 # a part of apprentiClavierAccessEnhancement add-on
-# Copyright (C) 2019-2022, Paulber19
+# Copyright (C) 2019-2023, Paulber19
 # This file is covered by the GNU General Public License.
 
 import addonHandler
@@ -49,10 +49,13 @@ from .ac_lessonsMode import (
 	MODE_DICTEE_N2,
 	MODE_DICTEE_N3
 )
-addon = addonHandler.getCodeAddon()
+
+from versionInfo import version_year, version_major
+
 
 addonHandler.initTranslation()
-
+NVDAVersion = [version_year, version_major]
+addon = addonHandler.getCodeAddon()
 
 # a global timer  for  delay task
 GB_timer = None
@@ -1276,9 +1279,27 @@ class AppModule(appModuleHandler.AppModule):
 
 	def saveNVDAModifierKeys(self):
 		printDebug("save all NVDA modifier keys")
-		self.useNumpadInsertAsNVDAModifierKey = config.conf["keyboard"]["useNumpadInsertAsNVDAModifierKey"]
-		self.useExtendedInsertAsNVDAModifierKey = config.conf["keyboard"]["useExtendedInsertAsNVDAModifierKey"]
-		self.useCapsLockAsNVDAModifierKey = config.conf["keyboard"]["useCapsLockAsNVDAModifierKey"]
+		if NVDAVersion >= [2023, 1]:
+			self.NVDAModifierKeys = config.conf["keyboard"]["NVDAModifierKeys"]
+		else:
+			self.useNumpadInsertAsNVDAModifierKey = config.conf["keyboard"]["useNumpadInsertAsNVDAModifierKey"]
+			self.useExtendedInsertAsNVDAModifierKey = config.conf["keyboard"]["useExtendedInsertAsNVDAModifierKey"]
+			self.useCapsLockAsNVDAModifierKey = config.conf["keyboard"]["useCapsLockAsNVDAModifierKey"]
+
+	def restoreNVDAModifierKeys(self):
+		printDebug("restore all NVDA modifier Keys")
+		if NVDAVersion >= [2023, 1]:
+			if hasattr(self, "NVDAModifierKeys"):
+				config.conf["keyboard"]["NVDAModifierKeys"] = self.NVDAModifierKeys
+		else:
+			if hasattr(self, "useNumpadInsertAsNVDAModifierKey"):
+				config.conf["keyboard"]["useNumpadInsertAsNVDAModifierKey"] = self.useNumpadInsertAsNVDAModifierKey
+			if hasattr(self, "useExtendedInsertAsNVDAModifierKey"):
+				config.conf["keyboard"]["useExtendedInsertAsNVDAModifierKey"] = self.useExtendedInsertAsNVDAModifierKey
+			if hasattr(self, "useCapsLockAsNVDAModifierKey"):
+				config.conf["keyboard"]["useCapsLockAsNVDAModifierKey"] = self.useCapsLockAsNVDAModifierKey
+
+
 
 	def event_appModule_gainFocus(self):
 		global GB_moduleHasFocus
@@ -1294,15 +1315,6 @@ class AppModule(appModuleHandler.AppModule):
 		ac_voiceControl.initialize()
 		# save all NVDA modifierKeys
 		self.saveNVDAModifierKeys()
-
-	def restoreNVDAModifierKeys(self):
-		printDebug("restore all NVDA modifier Keys")
-		if hasattr(self, "useNumpadInsertAsNVDAModifierKey"):
-			config.conf["keyboard"]["useNumpadInsertAsNVDAModifierKey"] = self.useNumpadInsertAsNVDAModifierKey
-		if hasattr(self, "useExtendedInsertAsNVDAModifierKey"):
-			config.conf["keyboard"]["useExtendedInsertAsNVDAModifierKey"] = self.useExtendedInsertAsNVDAModifierKey
-		if hasattr(self, "useCapsLockAsNVDAModifierKey"):
-			config.conf["keyboard"]["useCapsLockAsNVDAModifierKey"] = self.useCapsLockAsNVDAModifierKey
 
 	def event_appModule_loseFocus(self):
 		global GB_moduleHasFocus

@@ -17,6 +17,9 @@ Téléchargement:
 - [versions de développement ADDON_DEV_URL]
 
 
++ 1.10 (10/04/2023) +
+Correction du problème du blocage de NVDA 2023.1 au lancement d'ApprentiClavier : problème de compatibilité causé  par  la modification de la configuration des touches NVDA.
+
 + 1.9 (14/02/2023) +
 Compatibilité avec NVDA 2023.1
 
