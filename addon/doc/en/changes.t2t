@@ -2,19 +2,21 @@ ADDON_SUMMARY - History
 Author: ADDON_AUTHOR_NAME
 
 
-
 %!includeconf: ../addon_global.t2tconf
 %!includeconf: addon_informations.t2tconf
 
+URL : [ADDON_REPOSITORY ADDON_REPOSITORY]
 
-URL: ADDON_AUTHOR_URL
-
-[GitHub repository: ADDON_REPOSITORY ADDON_REPOSITORY]
 
 Download:
 - [current stable version: ADDON_CUR_VERSION ADDON_DOWNLOAD_SERVER1]
 - [previous stable version: ADDON_PREV_VERSION ADDON_DOWNLOAD_PREVIOUS]
 - [development versions: ADDON_DEV_URL]
+
+
++ 1.11 (March/23/2024) +
+- Compatibility with NVDA 2024.1
+- Dropped support for NVDA versions lower than 2022.1.
 
 
 + 1.10 (10/04/2023) +

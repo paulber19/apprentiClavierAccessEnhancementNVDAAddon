@@ -5,10 +5,8 @@ Author: ADDON_AUTHOR_NAME
 %!includeconf: ../addon_userManual.t2tconf
 %!includeconf: addon_informations.t2tconf
 
+URL: [ADDON_REPOSITORY ADDON_REPOSITORY]
 
-URL: ADDON_AUTHOR_URL
-
-[GitHub repository: ADDON_REPOSITORY ADDON_REPOSITORY]
 
 Download:
 - [stable version  ADDON_CUR_VERSION ADDON_DOWNLOAD_SERVER1]

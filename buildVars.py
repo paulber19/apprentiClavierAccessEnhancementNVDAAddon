@@ -21,23 +21,30 @@ addon_info = {
 	"addon_summary": _("ApprentiClavier: accessibility enhancement"),
 	# Add-on description
 	# Translators: Long description to be shown for this add-on on add-on information from add-ons manager
-	"addon_description": _("""Provide voice assistance  to ApprentiClavier keyboard learner (only french version).
+	"addon_description": _(
+		"""Provide voice assistance  to ApprentiClavier keyboard learner (only french version).
 Compatible and Tested with ApprentiClavier french version 1.0.9  and 1.0.10.
 """),
 	# version
-	"addon_version": "1.10",
+	"addon_version": "1.11",
 	# Author(s)
 	"addon_author": "PaulBer19",
 	# URL for the add-on documentation support
-	"addon_url": "paulber19@laposte.net",
+	"addon_url": "https://github.com/paulber19/apprentiClavierAccessEnhancementNVDAAddon.git",
+	# URL for the add-on repository where the source code can be found
+	"addon_sourceURL": "https://github.com/paulber19/apprentiClavierAccessEnhancementNVDAAddon.git",
 	# Documentation file name
 	"addon_docFileName": "addonUserManual.html",
 	# Minimum NVDA version supported (e.g. "2018.3")
-	"addon_minimumNVDAVersion": "2020.4",
+	"addon_minimumNVDAVersion": "2022.1",
 	# Last NVDA version supported/tested (e.g. "2018.4", ideally more recent than minimum version)
-	"addon_lastTestedNVDAVersion": "2023.1",
+	"addon_lastTestedNVDAVersion": "2024.1",
 	# Add-on update channel (default is stable or None)
 	"addon_updateChannel": None,
+	# Add-on license such as GPL 2
+	"addon_license": "GPL v2",
+	# URL for the license document the ad-on is licensed under
+	"addon_licenseURL": "https://www.gnu.org/licenses/gpl-2.0.html",
 }
 
 
@@ -62,3 +69,9 @@ excludedFiles = []
 # If your add-on is written in a language other than english, modify this variable.
 # For example, set baseLanguage to "es" if your add-on is primarily written in spanish.
 baseLanguage = "en"
+# Markdown extensions for add-on documentation
+# Most add-ons do not require additional Markdown extensions.
+# If you need to add support for markup such as tables, fill out the below list.
+# Extensions string must be of the form "markdown.extensions.extensionName"
+# e.g. "markdown.extensions.tables" to add tables.
+markdownExtensions = []

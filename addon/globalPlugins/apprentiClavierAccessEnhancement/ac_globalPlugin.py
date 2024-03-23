@@ -1,6 +1,6 @@
 # globalPlugins\apprentiClavierAccessEnhancement\ac_globalPlugin.py
 # a part of apprentiClavierAccessEnhancement add-on
-# Copyright (C) 2019-2022 Paulber19
+# Copyright (C) 2019-2023 Paulber19
 # This file is covered by the GNU General Public License.
 
 
@@ -37,12 +37,7 @@ class ApprentiClavierGlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 	def deleteSettingsMenu(self):
 		try:
-			if wx.version().startswith("4"):
-				# for wxPython 4
-				self.preferencesMenu.Remove(self.menu)
-			else:
-				# for wxPython 3
-				self.preferencesMenu.RemoveItem(self.menu)
+			self.preferencesMenu.Remove(self.menu)
 		except Exception:
 			pass
 
@@ -52,4 +47,8 @@ class ApprentiClavierGlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 	def onMenu(self, evt):
 		from .ac_configGui import ApprentiClavierSettingsDialog
-		gui.mainFrame._popupSettingsDialog(ApprentiClavierSettingsDialog)
+		from versionInfo import version_year, version_major
+		if [version_year, version_major] >= [2024, 1]:
+			gui.mainFrame.popupSettingsDialog(ApprentiClavierSettingsDialog)
+		else:
+			gui.mainFrame._popupSettingsDialog(ApprentiClavierSettingsDialog)

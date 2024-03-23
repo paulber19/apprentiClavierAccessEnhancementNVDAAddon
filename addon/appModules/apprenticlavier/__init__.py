@@ -255,7 +255,7 @@ def getScoreControlID():
 def getATaperAndDejaTapeControlID():
 	oDeb = api.getForegroundObject()
 	if (oDeb is None) or len(oDeb.children) < 2:
-		return(-1, -1)
+		return (-1, -1)
 	o = oDeb.lastChild
 	if o:
 		controlID = o.windowControlID
@@ -1298,8 +1298,6 @@ class AppModule(appModuleHandler.AppModule):
 				config.conf["keyboard"]["useExtendedInsertAsNVDAModifierKey"] = self.useExtendedInsertAsNVDAModifierKey
 			if hasattr(self, "useCapsLockAsNVDAModifierKey"):
 				config.conf["keyboard"]["useCapsLockAsNVDAModifierKey"] = self.useCapsLockAsNVDAModifierKey
-
-
 
 	def event_appModule_gainFocus(self):
 		global GB_moduleHasFocus
