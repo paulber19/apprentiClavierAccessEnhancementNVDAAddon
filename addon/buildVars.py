@@ -26,7 +26,7 @@ addon_info = {
 Compatible and Tested with ApprentiClavier french version 1.0.9  and 1.0.10.
 """),
 	# version
-	"addon_version": "1.13",
+	"addon_version": "1.13.1",
 	# Author(s)
 	"addon_author": "PaulBer19",
 	# URL for the add-on documentation support

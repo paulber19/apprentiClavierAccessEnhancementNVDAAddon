@@ -35,6 +35,8 @@ def keepPreviousSettingsConfirmation(addonSummary):
 	from messages import confirm_YesNo, ReturnCode
 	del sys.path[-1]
 	del sys.path[-1]
+	del sys.modules["messages"]
+
 	if confirm_YesNo(
 		# Translators: the label of a message box dialog.
 		_("Do you want to keep current add-on configuration settings ?"),

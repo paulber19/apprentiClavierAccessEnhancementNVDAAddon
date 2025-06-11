@@ -15,6 +15,7 @@ path = os.path.join(addon.path, "shared")
 sys.path.append(path)
 from ac_addonConfigManager import _addonConfigManager
 del sys.path[-1]
+
 addonHandler.initTranslation()
 
 

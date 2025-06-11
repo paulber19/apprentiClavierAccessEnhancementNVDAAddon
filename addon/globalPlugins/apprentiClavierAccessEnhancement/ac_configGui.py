@@ -1,6 +1,6 @@
 # globalPlugins\apprentiClavierAccessEnhancement\ac_configGui.py
 # a part of aprentiClavierAccessEnhancement add-on
-# Copyright 2019-2024,paulber19
+# Copyright 2019-2025,paulber19
 # This file is covered by the GNU General Public License.
 
 # manage add-on configuration dialog
@@ -17,6 +17,7 @@ path = os.path.join(_curAddon.path, "shared")
 sys.path.append(path)
 from ac_addonConfigManager import _addonConfigManager
 del sys.path[-1]
+
 addonHandler.initTranslation()
 
 

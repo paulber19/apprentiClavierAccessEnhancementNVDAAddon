@@ -118,7 +118,7 @@ class AddonConfigurationManager():
 		config.post_configSave.register(self.handlePostConfigSave)
 
 	def warnConfigurationReset(self):
-		from .messages import alert
+		from messages import alert
 		wx.CallLater(
 			100,
 			alert,
@@ -128,7 +128,6 @@ class AddonConfigurationManager():
 				"The  configuration has been reset to factory defaults"),
 			# Translators: title of message box
 			"{addon} - {title}" .format(addon=_curAddon.manifest["summary"], title=_("Warning")),
-			wx.OK | wx.ICON_WARNING
 		)
 
 	def loadSettings(self):
