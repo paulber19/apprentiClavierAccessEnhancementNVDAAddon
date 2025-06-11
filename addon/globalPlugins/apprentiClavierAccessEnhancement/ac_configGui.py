@@ -1,6 +1,6 @@
 # globalPlugins\apprentiClavierAccessEnhancement\ac_configGui.py
 # a part of aprentiClavierAccessEnhancement add-on
-# Copyright 2019-2022,paulber19
+# Copyright 2019-2024,paulber19
 # This file is covered by the GNU General Public License.
 
 # manage add-on configuration dialog
@@ -78,6 +78,8 @@ class ApprentiClavierSettingsDialog(SettingsDialog):
 	def saveSettingChanges(self):
 		if self.autoCheckForUpdatesCheckBox.IsChecked() != _addonConfigManager .toggleAutoUpdateCheck(False):
 			_addonConfigManager .toggleAutoUpdateCheck(True)
+			from . updateHandler.update_check import setCheckForUpdate
+			setCheckForUpdate(_addonConfigManager.toggleAutoUpdateCheck(False))
 		if self.updateReleaseVersionsToDevVersionsCheckBox.IsChecked() != (
 			_addonConfigManager .toggleUpdateReleaseVersionsToDevVersions(False)):
 			_addonConfigManager .toggleUpdateReleaseVersionsToDevVersions(True)

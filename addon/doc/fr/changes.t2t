@@ -14,23 +14,48 @@ Téléchargement:
 - [versions de développement ADDON_DEV_URL]
 
 
++ 1.13 (20/05/2025) +
+Compatibilité avec NVDA 2025.1
+
+Les versions de NVDA antérieures à la 2024.1 ne sont plus supportées.
+
+
+Correction de bogues :
+- la recherche de mise à jour ne se fait plus lorsque l'option "Rechercher automatiquement les mises à jour " est décochée juste après le démarrage de NVDA.
+
+
+Développement :
+- lors de l'installation de l'extension, la configuration courante n'est plus sauvegardée dans le dossier de l'extension mais est maintenant sauvegardée dans le dossier de la configuration utilisateur. Cela permet si une installation se passe mal de conserver quand même la configuration courante.
+
+
+Mise en conformité avec l'API de NVDA :
+- utilisation de la méthode "ExecAndPump" du module "systemUtils ".
+- prise en compte de l'obsolescence de gui.messageBox et gui.message.messageBox, remplacés par MessageDialog:
+ - MessageDialog est maintenant utilisé pour toutes les versions de NVDA supérieures à 2025.1.
+
+
++ 1.12 (19/10/2024) +
+Compatibilité avec NVDA 2024.2, NVDA 2024.3 et NVDA 2024.4.
+
+Les versions de NVDA antérieures à la version 2023.1 ne sont plus prises en charge.
+
 + 1.11 (23/03/2024) +
 - Compatibilité avec NVDA 2024.1
 - Abandon du support des versions de NVDA inférieures à la 2022.1.
 
 
 + 1.10 (10/04/2023) +
-Correction du problème du blocage de NVDA 2023.1 au lancement d'ApprentiClavier : problème de compatibilité causé  par  la modification de la configuration des touches NVDA.
+Correction du problème du blocage de NVDA 2023.1 au lancement d'ApprentiClavier : problème de compatibilité causé par la modification de la configuration des touches NVDA.
 
 + 1.9 (14/02/2023) +
 Compatibilité avec NVDA 2023.1
 
 + 1.8 (17/05/2022) +
--  correction de l'impossibilité de voir l'historique  de l'extension.
+- correction de l'impossibilité de voir l'historique de l'extension.
 
 
 + 1.7 (26/01/2022) +
-- compatibilité  avec NVDA 2022.1.
+- compatibilité avec NVDA 2022.1.
 - réinitialisation de la configuration en cas d'erreurs dans le fichier de configuration.
 
 
@@ -40,10 +65,10 @@ Changements:
 
 
 + 1.6 (03/11/2021) +
-compatibilité  avec NVDA 2021.3. Les versions de NVDA antérieure à la 2020.4 ne sont pas supportées.
+Compatibilité avec NVDA 2021.3. Les versions de NVDA antérieure à la 2020.4 ne sont pas supportées.
 
 + 1.5 (16/06/2021) +
-- compatibilité  avec NVDA 2021.1. Les versions de NVDA antérieure à la 2019.3 ne sont pas supportées.
+- compatibilité avec NVDA 2021.1. Les versions de NVDA antérieure à la 2019.3 ne sont pas supportées.
 - suppression du code spécifique à Python 2.7.
 
 
@@ -58,7 +83,7 @@ Correction du paramètre "lastTestedNVDAVersion" du fichier buildVars.py.
 - compatibilité avec NVDA 2020.4
 - ajout du bouton "Voir l'historique" dans la catégorie "Mise à jour " des paramètres de l'extension.
 - ajout du bouton "Quoi de neuf" dans le dialogue proposant l'installation d'une nouvelle mise à jour.
-- correction des erreurs souvelées par l'outil de validation Flake8.
+- correction des erreurs souvelées  par l'outil de validation Flake8.
 
 
 + v1.3 (28/07/2020) +
@@ -104,7 +129,7 @@ Correction du fichier addon_build.t2tconf.
 
 
 + v2.0 10 Juin 2013) +
-- Refonte complète du code  source 
+- Refonte complète du code source 
 
 
 + v1.0 (2 janvier Novembre 2012) +

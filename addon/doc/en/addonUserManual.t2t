@@ -9,7 +9,7 @@ URL: [ADDON_REPOSITORY ADDON_REPOSITORY]
 
 
 Download:
-- [stable version  ADDON_CUR_VERSION ADDON_DOWNLOAD_SERVER1]
+- [stable version ADDON_CUR_VERSION ADDON_DOWNLOAD_SERVER1]
 - [development version ADDON_DEV_URL]
 
 
@@ -27,7 +27,7 @@ Sorry, but this is an automatic translation from french user manual.
 + Introduction +
 
 ++ Features ++
-This extension tries to make the ApprentiClavier software (only french version)  as accessible as possible under NVDA.
+This extension tries to make the ApprentiClavier software (only french version) as accessible as possible under NVDA.
 
 It does not add any script.
 

@@ -1,6 +1,6 @@
 # globalPlugins\apprentiClavierAccessEnhancement\ac_globalPlugin.py
 # a part of apprentiClavierAccessEnhancement add-on
-# Copyright (C) 2019-2023 Paulber19
+# Copyright (C) 2019-2024 Paulber19
 # This file is covered by the GNU General Public License.
 
 
@@ -22,9 +22,10 @@ class ApprentiClavierGlobalPlugin(globalPluginHandler.GlobalPlugin):
 	def __init__(self, *args, **kwargs):
 		super(ApprentiClavierGlobalPlugin, self).__init__(*args, **kwargs)
 		self.installSettingsMenu()
+		from .updateHandler.update_check import setCheckForUpdate
+		setCheckForUpdate(_addonConfigManager.toggleAutoUpdateCheck(False))
 		from . updateHandler import autoUpdateCheck
-		if _addonConfigManager.toggleAutoUpdateCheck(False):
-			autoUpdateCheck(releaseToDev=_addonConfigManager.toggleUpdateReleaseVersionsToDevVersions(False))
+		autoUpdateCheck(releaseToDev=_addonConfigManager.toggleUpdateReleaseVersionsToDevVersions(False))
 
 	def installSettingsMenu(self):
 		self.preferencesMenu = gui.mainFrame.sysTrayIcon.preferencesMenu

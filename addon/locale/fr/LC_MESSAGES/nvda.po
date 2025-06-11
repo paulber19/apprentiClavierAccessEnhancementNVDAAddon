@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: apprentiClavierAccessEnhancement\n"
 "Report-Msgid-Bugs-To: nvda-translations@freelists.org\n"
-"POT-Creation-Date: 2024-03-23 18:37+0100\n"
-"PO-Revision-Date: 2024-03-23 18:39+0100\n"
+"POT-Creation-Date: 2024-10-20 11:32+0200\n"
+"PO-Revision-Date: 2024-10-20 11:33+0200\n"
 "Last-Translator: paulber19 <paulber19@laposte.net>\n"
 "Language-Team: paulber19 <paulber19@laposte.net>\n"
 "Language: fr_FR\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.4\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: appModules/apprenticlavier/ac_config.py:151
@@ -44,8 +44,6 @@ msgid "%s - settings"
 msgstr "%s - Paramètres"
 
 #: globalPlugins/apprentiClavierAccessEnhancement/ac_configGui.py:30
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:84
 #: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:83
 msgid "Update"
 msgstr "Mise à jour"
@@ -67,22 +65,16 @@ msgstr "&Rechercher une mise à jour"
 msgid "View &history"
 msgstr "&Voir l'historique"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:87
 #: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:86
 #, python-brace-format
 msgid "Downloading {name}"
 msgstr "Téléchargement de {name} en cours"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:102
 #: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:101
 #, python-brace-format
 msgid "Error downloading update for {name}."
 msgstr "Erreur lors du téléchargement de la mise à jour de {name}."
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:161
 #: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:155
 #, python-brace-format
 msgid "Cannot update {name} - missing file or invalid file format"
@@ -90,119 +82,30 @@ msgstr ""
 "Impossible de mettre à jour {name} - fichier manquant ou format de fichier "
 "incorrect"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:179
 #: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:172
 msgid "Updating"
 msgstr "Mise à jour en cours"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:181
 #: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:174
 msgid "Please wait while the add-on is being updated."
 msgstr "Veuillez patienter durant la mise à jour de l'extension."
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:200
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:195
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:196
 #, python-brace-format
 msgid "Failed to update {name} add-on"
 msgstr "Échec de la mise à jour de l'extension {name}"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:255
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:247
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:248
 #, python-brace-format
 msgid "{summary} - update"
 msgstr "{summary} - mise à jour"
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:265
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:257
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:258
 msgid "The service is temporarily under maintenance. Please, try again later."
 msgstr ""
 "Le service est momentanément en maintenance. Veuillez réessayer plus tard."
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:294
-#, python-brace-format
-msgid ""
-"The update is not compatible with this version of NVDA: Minimum NVDA "
-"version: {minYear}.{minMajor}, last tested: {testedYear}.{testedMajor}."
-msgstr ""
-"La mise à jour n'est pas compatible avec cette version de NVDA. Version "
-"minimum de NVDA : {minYear}.{minMajor}, dernière version testée : "
-"{testedYear}.{testedMajor}."
-
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:299
-msgid "Do you want to ignore the incompatibility ?"
-msgstr "Voulez-vous ignorer l'incompatibilité ?"
-
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:303 shared/ac_addonConfigManager.py:115
-msgid "Warning"
-msgstr "Avertissement"
-
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:349
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:329
-#, python-format
-msgid "New version%s is available. Do you want to download it now?"
-msgstr ""
-"La nouvelle version %s est disponible. Voulez-vous la télécharger "
-"maintenant ?"
-
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:352
-#, python-format
-msgid ""
-"New version%s is available. But this version is not compatible. Do you want "
-"to ignore this incompatible and download it now?"
-msgstr ""
-"La nouvelle version %s est disponible. Mais cette version n'est pas "
-"compatible. Voulez-vous quand même la télécharger maintenant ?"
-
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:369
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:353
-#, python-format
-msgid "You are up-to-date. %s is the latest version."
-msgstr "Vous êtes à jour, %s est la dernière version."
-
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:376
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:360
-msgid "Oops! There was a problem checking for updates. Please retry later"
-msgstr ""
-"Oups! Il y a un problème pour rechercher les mises à jour. Réessayer "
-"ultérieurement"
-
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:531
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:515
-msgid "&Yes"
-msgstr "&Oui"
-
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:536
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:520
-msgid "&No"
-msgstr "&Non"
-
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:541
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:525
-msgid "&Later"
-msgstr "&Plus tard"
-
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check -
-#: Copie.py:545
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:529
-msgid "Wha&t's new"
-msgstr "Quoi &de neuf"
-
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:285
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:286
 #, python-brace-format
 msgid ""
 "The update is not compatible with this version of NVDA. Minimum NVDA "
@@ -212,7 +115,14 @@ msgstr ""
 "minimum de NVDA : {minYear}.{minMajor}, dernière version testée : "
 "{testedYear}.{testedMajor}."
 
-#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:333
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:330
+#, python-format
+msgid "New version%s is available. Do you want to download it now?"
+msgstr ""
+"La nouvelle version %s est disponible. Voulez-vous la télécharger "
+"maintenant ?"
+
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:334
 #, python-brace-format
 msgid ""
 "New version{0} is available.\n"
@@ -225,6 +135,33 @@ msgstr ""
 "reuqise = {1}, dernière version testée = {2}.\n"
 "Voulez-vous ignorer cette incompatibilité et la télécharger quand même "
 "maintenant ?"
+
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:354
+#, python-format
+msgid "You are up-to-date. %s is the latest version."
+msgstr "Vous êtes à jour, %s est la dernière version."
+
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:361
+msgid "Oops! There was a problem checking for updates. Please retry later"
+msgstr ""
+"Oups! Il y a un problème pour rechercher les mises à jour. Réessayer "
+"ultérieurement"
+
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:516
+msgid "&Yes"
+msgstr "&Oui"
+
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:521
+msgid "&No"
+msgstr "&Non"
+
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:526
+msgid "&Later"
+msgstr "&Plus tard"
+
+#: globalPlugins/apprentiClavierAccessEnhancement/updateHandler/update_check.py:530
+msgid "Wha&t's new"
+msgstr "Quoi &de neuf"
 
 #: installTasks.py:60
 msgid "Do you want to keep current add-on configuration settings ?"
@@ -250,3 +187,7 @@ msgid ""
 msgstr ""
 "Le fichier de configuration de l'extension contient des erreurs. La "
 "configuration a été réinitialisée aux valeurs par défaut"
+
+#: shared/ac_addonConfigManager.py:115
+msgid "Warning"
+msgstr "Avertissement"
