@@ -1,0 +1,65 @@
+ADDON_SUMMARY - Manual del usuario
+Autor: ADDON_AUTHOR_NAME
+
+
+%!includeconf: ../addon_userManual.t2tconf
+%!includeconf: addon_informations.t2tconf
+
+URL: [ADDON_REPOSITORY ADDON_REPOSITORY]
+
+
+Descargar:
+- [Versión estable ADDON_CUR_VERSION ADDON_DOWNLOAD_SERVER1]
+- [Versiones de desarrollo ADDON_DEV_URL]
+
+
+Compatibilidad:
+- mínima de NVDA requerida: MINIMUM_NVDA_VERSION
+- última versión de NVDA probada: LAST_TESTED_NVDA_VERSION
+
+
+Traducido por Rémy Ruiz, cambios por Carlos Esteban martínez Macías.
+
+= Índice =[toc]
+%%toc
+
++ Introducción +
+
+++ Funcionalidades ++
+Este complemento intenta hacer que el software ApprentiClavier sea lo más accesible posible bajo NVDA.
+
+No se añade ningún script.
+
+++ Compatibilidad ++
+Este complemento fue probado con ApprentiClavier versión francesa 1.0.9 y 1.0.10.
+
+++ Actualización ++
+La actualización del complemento por defecto se hace automáticamente poco  tiempo después de iniciar NVDA (entre 20 y 600 segundos) y como máximo una vez al día.
+
+Puedes desactivar esta actualización desmarcando la opción "Buscar automáticamente actualizaciones" que se encuentra en la categoría "Actualización".
+
+La versión del complemento puede ser:
+- Ya sea una versión estable: su número de versión es de tipo "1.0" por ejemplo.
+- Ya sea una versión de desarrollo: su número de versión es entonces de tipo "1.0-dev1", o "1.0-rc1", o "1.0-beta2".
+
+
+Por defecto, una versión estable se actualiza con la última versión estable (Número de versión superior).
+
+Sin embargo, es posible actualizar la versión actual estable con una versión de desarrollo de la próxima versión estable. Simplemente marcando la opción "Actualizar también versiones estable hacia versiones de desarrollo" situado en la categoría "Actualización".
+
+Una versión de desarrollo se actualiza:
+- con una versión de desarrollo más reciente,
+- con su versión estable,
+- o la última versión estable si la opción anterior no está marcada.
+
+
+El botón "Buscar actualización" situado en la categoría "Actualización" te permite buscar inmediatamente una actualización.
+
+El botón "Ver historial" situado en la misma categoría te permite ver el historial de la versión actual en el navegador.
+
+En el caso de una actualización automática, y si se detecta una nueva versión, el cuadro de diálogo "Actualización" aparece para proponer:
+- ya sea la instalación inmediata de la nueva versión,
+- ya sea para posponer la actualización a más tarde. En este caso, la búsqueda se reiniciará como mínimo una hora más tarde.
+
+
+En el caso  de una actualización de una versión estable, el botón "Qué hay de nuevo" ofrece la posibilidad, de abrir en el navegador, el historial del complemento y asi poder conocer las novedades de la versión propuesta.

@@ -1,0 +1,142 @@
+ADDON_SUMMARY - Historial
+Autor: ADDON_AUTHOR_NAME
+
+
+%!includeconf: ../addon_global.t2tconf
+%!includeconf: addon_informations.t2tconf
+
+URL: [ADDON_REPOSITORY ADDON_REPOSITORY]
+
+
+Descarga:
+- [Versión estable actual: ADDON_CUR_VERSION ADDON_DOWNLOAD_SERVER1]
+- [Version estable anterior: ADDON_PREV_VERSION ADDON_DOWNLOAD_PREVIOUS]
+- [Versiones de desarrollo ADDON_DEV_URL]
+
+
+Traducido por Rémy Ruiz, cambios por Carlos Esteban martínez Macías.
+
+
++ 1.13 (05/06/2025) +
+Compatibilidad con NVDA 2025.1
+
+Las versiones de NVDA anteriores a 2024.1 ya no son soportadas.
+
+
+Corección de fallos:
+- la búsqueda de actualización ya no se realiza cuando la opción "Buscar automáticamente actualizaciones" esta sin marcar justo después de iniciar NVDA.
+
+
+Desarrolladores:
+- al instalar el complemento, la configuración actual ya no se guarda en la carpeta del complemento pero ahora se guarda en la carpeta de configuración del usuario. Esto permite si una instalación sale mal de conservar de todos modos la configuración actual.
+
+
+Puesta en conformidad con la API de NVDA:
+- Uso del método "ExecAndPump" del módulo "systemUtils".
+- se toma en cuenta la obsolescencia de gui.messageBox y gui.message.messageBox, reemplazado por MessageDialog:
+ -  -  MessageDialog ahora se usa para todas las versiones de NVDA superiores a 2025.1.
+
+
++ 1.12 (19/10/2024) +
+Compatibilidad con NVDA 2024.2, NVDA 2024.3 y NVDA 2024.4.
+
+Las versiones de NVDA anteriores a 2023.1 ya no son soportadas.
+
+
++ 1.11 (23/03/2024) +
+- Compatibilidad con NVDA 2024.1
+- Abandono del apoyo de las versiones de NVDA anteriores a la 2022.1.
+
+
++ 1.10 (10/04/2023) +
+Corrección del bloqueo de NVDA 2023.1 al iniciarse ApprentiClavier: Problema de compatibilidad causado por la modificación de la configuración de las teclas de NVDA.
+
+
++ 1.9 (14/02/2023) +
+Compatibilidad con NVDA 2023.1
+
+
++ 1.8 (17/05/2022) +
+- corrección de la imposibilidad de ver el historial del complemento.
+
+
++ 1.7 (26/01/2022) +
+- compatibilidad con NVDA 2022.1.
+- reinicialización de la configuración en caso de errores en el archivo de configuración.
+
+
+Cambios:
+- durante la actualización automática del complemento, ya no se le solicita al usuario si desea conservar las opciones de configuración actual del complemento.
+- durante una instalación manual del complemento, se solicita una solicitud de confirmación cuando el usuario ha elegido no conservar las opciones de configuración actual del complemento.
+
+
++ 1.6 (03/11/2021) +
+Compatibilidad con NVDA 2021.3. Las versiones de NVDA anteriores a la 2020.4 ya no son soportadas.
+
+
++ 1.5 (16/06/2021) +
+- compatibilidad con NVDA 2021.1. Las versiones de NVDA anteriores a la 2019.3 ya no son soportadas.
+- eliminado código relativo a Python 2.7.
+
+
++ 1.4.2 (04/02/2021) +
+Se añadió traducción árabe.
+
+
++ 1.4.1 (28/12/2020) +
+Corrección del parámetro "lastTestedNVDAVersion" del archivo buildVars.py.
+
+
++ 1.4 (22/12/2020) +
+- compatibilidad con NVDA 2020.4
+- añadido el botón "Ver historial" que se encuentra en la categoría "Actualización" en las "Opciones" del complemento.
+- añadido el botón "Qué hay de nuevo" en el  cuadro de diálogo proponiendo la instalación de una nueva actualización.
+- corrección de errores  planteados por la herramienta de validación Flake8.
+
+
++ v1.3 (28/07/2020) +
+Compatibilidad con NVDA 2020.2
+
+
++ v1.2.1 (03/04/2020) +
+Corrección del historial de cambios  del complemento.
+
+
++ v1.2 (03/04/2020) +
+- puesta en compatibilidad con NVDA 2020.1,
+- puesta en conformidad de prueba de compatibilidad del complemento con NVDA.
+
+
++ v1.1.1 (14/02/2020) +
+Corrección del archivo addon_build.t2tconf.
+
+
++ v1.1 (29/12/2019) +
+- Compatibilidad con NVDA 2019.3
+- formateado de la documentación
+
+
++ v1.0 (17/10/2019) +
+- Cambio del nombre del complemento y se regresa a la versión 1.0
+- compatibilidad con NVDA 2019.2 y versiones alfa de NVDA 2019.3.
+- puesta en marcha de la actualización automática del complemento.
+
+
++ v2.2.1 (21 de julio de 2016) +
+- corrección de la "y" no pronunciada
+
+
++ v2.2 (29 de octubre de 2014) +
+- compatibilidad con NVDA 2014.4
+
+
++ v2.1 (29 de octubre de 2014) +
+- compatibilidad con NVDA 2014.3
+
+
++ v2.0 (10 de junio de 2013) +
+- Rediseño completo del código fuente
+
+
++ v1.0 (2 de enero de 2012) +
+Creación del complemento

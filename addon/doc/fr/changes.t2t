@@ -83,12 +83,11 @@ Correction du paramètre "lastTestedNVDAVersion" du fichier buildVars.py.
 - compatibilité avec NVDA 2020.4
 - ajout du bouton "Voir l'historique" dans la catégorie "Mise à jour " des paramètres de l'extension.
 - ajout du bouton "Quoi de neuf" dans le dialogue proposant l'installation d'une nouvelle mise à jour.
-- correction des erreurs souvelées  par l'outil de validation Flake8.
+- correction des erreurs soulevées par l'outil de validation Flake8.
 
 
 + v1.3 (28/07/2020) +
 Compatibilité avec NVDA 2020.2
-
 
 
 + v1.2.1 (03/04/2020) +
@@ -100,12 +99,11 @@ Correction de l'historique des changements de l'extension.
 - mise en conformité avec NVDA pour le test de compatibilité de l'extension avec NVDA.
 
 
-
 + v1.1.1 (14/02/2020) +
 Correction du fichier addon_build.t2tconf.
 
 + v1.1 (29/12/2019) +
-- Compatibilité avec 2019.3
+- Compatibilité avec NVDA 2019.3
 - mise en forme de la documentation
 
 
@@ -119,18 +117,18 @@ Correction du fichier addon_build.t2tconf.
 - correction du "y" non prononcé
 
 
-+ v2.2 29 Octobre 2014) +
++ v2.2 (29 Octobre 2014) +
 - compatibilité avec NVDA 2014.4
 
 
-+ v2.1 29 Octobre 2014) +
++ v2.1 (29 Octobre 2014) +
 - compatibilité avec NVDA 2014.3
 
 
 
-+ v2.0 10 Juin 2013) +
++ v2.0 (10 Juin 2013) +
 - Refonte complète du code source 
 
 
-+ v1.0 (2 janvier Novembre 2012) +
++ v1.0 (2 janvier 2012) +
 Création de l'extension
