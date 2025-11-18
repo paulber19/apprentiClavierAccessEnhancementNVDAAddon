@@ -7,25 +7,16 @@
 
 import addonHandler
 from logHandler import log
-
-try:
-	# for nvda version >= 2021.2
-	from characterProcessing import SymbolLevel
-	SYMLVL_SOME = SymbolLevel.SOME
-	SYMLVL_ALL = SymbolLevel.ALL
-except ImportError:
-	from characterProcessing import SYMLVL_SOME, SYMLVL_ALL
+from characterProcessing import SymbolLevel
+SYMLVL_SOME = SymbolLevel.SOME
+SYMLVL_ALL = SymbolLevel.ALL
 import config
 import globalVars
 import api
-try:
-	# for nvda version >= 2021.2
-	from controlTypes.state import State
-	STATE_CHECKED = State.CHECKED
-except ImportError:
-	import controlTypes
-	STATE_CHECKED = controlTypes.STATE_CHECKED
+from controlTypes.state import State
+STATE_CHECKED = State.CHECKED
 from . import ac_config
+from synthDriverHandler import getSynth, setSynth
 
 addonHandler.initTranslation()
 
@@ -64,29 +55,35 @@ def getUserOptions():
 
 class SpeedRateVoiceControl(object):
 	def __init__(self):
-		self.setting = self.getSetting()
+		self.rateSetting = self.getSetting()
+
 
 	def getSetting(self):
 		settings = globalVars.settingsRing.settings
 		for setting in settings:
-			try:
-				# for nvda version upper 2019.1.1
-				id = setting.setting.id
-			except Exception:
-				# for nvda version lower 2019.2
-				id = setting.setting.name
+			id = setting.setting.id
 			if id == "rate":
 				return setting
-
+		return None
 	def getValue(self):
-		return self.setting._get_value()
+		synthName = getSynth().name
+		rate = config.conf["speech"][synthName]["rate"]
+		return rate
+
 
 	def setValue(self, value):
-		self.setting._set_value(value)
+		if self.getValue() == value:
+			return
+		log.debug("new rate: %s" %value)
+		synth = getSynth()
+		config.conf["speech"][synth.name]["rate"] = value
+		synth.rate = value
+		globalVars.settingsRing.updateSupportedSettings(synth)
+
 
 	def getCurrentSetting(self):
-		min = self.setting.min
-		max = self.setting.max
+		min = self.rateSetting.min
+		max = self.rateSetting.max
 		speedRate = self.getValue()
 		return (speedRate, min, max)
 
@@ -187,6 +184,7 @@ class VoiceControl:
 				self.OffGenCourant = 0 - self.OffGen
 
 	def updateVoiceSettings(self, windowName, windowText):
+		log.debug("updateVoiceSettings: %s" % windowName)
 		self.setOffsetGenEtExpliCourants(windowName)
 		# Vitesse vocalisation, et ponctuation, selon la mise en forme du titre de la fenêtre
 		# par defaut, vitesse, ponctuation STANDARD (
@@ -257,7 +255,7 @@ class VoiceControl:
 			self.MemoSpeed = self.userSpeed + self.OffGenCourant + self.offDictee19 + 3 * self.incDictee19
 			punctuation = 4
 		# on positionne le debit, la ponctuation et l'echo caractere
-		self.ValueVoiceSetting(V_RATE, self.MemoSpeed)
+		self.ValueVoiceSetting(V_RATE, int(self.MemoSpeed))
 		self.setPunctuationLevel(punctuation)
 		self.setTypingEcho(typingEcho)
 
@@ -289,15 +287,19 @@ class VoiceControl:
 		config.conf["speech"]["symbolLevel"] = level
 
 	def setTypingEcho(self, echo):
+		try:
+			from config.configFlags import TypingEcho
+			value = TypingEcho.OFF.value
+		except ImportError:
+			value = False
 		# word echo off
-		config.conf["keyboard"]["speakTypedWords"] = False
+		config.conf["keyboard"]["speakTypedWords"] = value
 		if echo == 0:
 			# char echo off
-			config.conf["keyboard"]["speakTypedCharacters"] = False
-
+			config.conf["keyboard"]["speakTypedCharacters"] = value
 		elif echo == 1:
 			# characterecho on
-			config.conf["keyboard"]["speakTypedCharacters"] = False
+			config.conf["keyboard"]["speakTypedCharacters"] = value
 
 
 def initialize():

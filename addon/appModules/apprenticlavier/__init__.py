@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-15 -*-
 # appModules\aprenticlavier\___init__.py
 # a part of apprentiClavierAccessEnhancement add-on
-# Copyright (C) 2019-2023, Paulber19
+# Copyright (C) 2019-2025, Paulber19
 # This file is covered by the GNU General Public License.
 
 import addonHandler
@@ -10,12 +10,8 @@ import os
 import globalVars
 import time
 import appModuleHandler
-try:
-	# for nvda version >= 2021.2
-	from characterProcessing import SymbolLevel
-	SYMLVL_ALL = SymbolLevel.ALL
-except ImportError:
-	from characterProcessing import SYMLVL_ALL
+from characterProcessing import SymbolLevel
+SYMLVL_ALL = SymbolLevel.ALL
 import speech
 import ui
 import api
@@ -26,12 +22,9 @@ from NVDAObjects.window.edit import UnidentifiedEdit
 from editableText import EditableText
 from IAccessibleHandler import accNavigate
 import config
-try:
-	# for nvda version >= 2021.2
-	from controlTypes.state import State
-	STATE_INVISIBLE = State.INVISIBLE
-except ImportError:
-	from controlTypes import STATE_INVISIBLE
+from controlTypes.state import State
+STATE_INVISIBLE = State.INVISIBLE
+
 from oleacc import (
 	STATE_SYSTEM_INVISIBLE,
 	NAVDIR_PREVIOUS,
@@ -50,11 +43,8 @@ from .ac_lessonsMode import (
 	MODE_DICTEE_N3
 )
 
-from versionInfo import version_year, version_major
-
-
 addonHandler.initTranslation()
-NVDAVersion = [version_year, version_major]
+
 addon = addonHandler.getCodeAddon()
 
 # a global timer  for  delay task
@@ -143,15 +133,16 @@ def GetObjectId(obj):
 
 
 def SayValue(value):
-
 	if value is None:
 		return
 	value = value.strip("\n\r")
 	value = value.strip(u" ")
+	value = value.replace("\r\n", "\n")
 	if len(value):
 		printDebug("SayValue: %s" % value)
 		ac_voiceControl.updateSettings(api.getForegroundObject(), value)
-		ui.message(value)
+		from core import callLater
+		callLater(100, ui.message, value)
 
 
 def SayText(sText1, sText2, sText3):
@@ -1279,25 +1270,14 @@ class AppModule(appModuleHandler.AppModule):
 
 	def saveNVDAModifierKeys(self):
 		printDebug("save all NVDA modifier keys")
-		if NVDAVersion >= [2023, 1]:
-			self.NVDAModifierKeys = config.conf["keyboard"]["NVDAModifierKeys"]
-		else:
-			self.useNumpadInsertAsNVDAModifierKey = config.conf["keyboard"]["useNumpadInsertAsNVDAModifierKey"]
-			self.useExtendedInsertAsNVDAModifierKey = config.conf["keyboard"]["useExtendedInsertAsNVDAModifierKey"]
-			self.useCapsLockAsNVDAModifierKey = config.conf["keyboard"]["useCapsLockAsNVDAModifierKey"]
+		self.NVDAModifierKeys = config.conf["keyboard"]["NVDAModifierKeys"]
+
 
 	def restoreNVDAModifierKeys(self):
 		printDebug("restore all NVDA modifier Keys")
-		if NVDAVersion >= [2023, 1]:
-			if hasattr(self, "NVDAModifierKeys"):
-				config.conf["keyboard"]["NVDAModifierKeys"] = self.NVDAModifierKeys
-		else:
-			if hasattr(self, "useNumpadInsertAsNVDAModifierKey"):
-				config.conf["keyboard"]["useNumpadInsertAsNVDAModifierKey"] = self.useNumpadInsertAsNVDAModifierKey
-			if hasattr(self, "useExtendedInsertAsNVDAModifierKey"):
-				config.conf["keyboard"]["useExtendedInsertAsNVDAModifierKey"] = self.useExtendedInsertAsNVDAModifierKey
-			if hasattr(self, "useCapsLockAsNVDAModifierKey"):
-				config.conf["keyboard"]["useCapsLockAsNVDAModifierKey"] = self.useCapsLockAsNVDAModifierKey
+		if hasattr(self, "NVDAModifierKeys"):
+			config.conf["keyboard"]["NVDAModifierKeys"] = self.NVDAModifierKeys
+
 
 	def event_appModule_gainFocus(self):
 		global GB_moduleHasFocus
@@ -1502,9 +1482,7 @@ class AppModule(appModuleHandler.AppModule):
 	def script_test(self, gesture):
 		print("ApprentiClavier test")
 		ui.message("ApprentiClavier test")
-		from .updateHandler.update_check import CheckForAddonUpdate
-		fileName = os.path.join(globalVars.appArgs.configPath, "myAddons.latest")
-		wx.CallAfter(CheckForAddonUpdate, None, updateInfosFile=fileName, silent=False, releaseToDev=True)
+
 
 	__gestures = {
 		"kb:nvda+control+f9": "TraceOnOff",
