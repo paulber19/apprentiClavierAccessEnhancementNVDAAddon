@@ -1,4 +1,4 @@
-ADDON_SUMMARY - historique
+  ADDON_SUMMARY - historique
 Auteur: ADDON_AUTHOR_NAME
 
 
@@ -12,6 +12,27 @@ Téléchargement:
 - [Version stable actuelle: ADDON_CUR_VERSION ADDON_DOWNLOAD_SERVER1]
 - [Version stable précédente: ADDON_PREV_VERSION ADDON_DOWNLOAD_PREVIOUS]
 - [versions de développement ADDON_DEV_URL]
+
+
++ 1.14 (26/02/2026) +
+Compatibilité avec NVDA 2026.1.
+
+Les versions de NVDA antérieures à la 2025.1 ne sont plus supportées.
+
+Correction de bogues :
+- la lecture des pages d'explication se fait maintenant correctement lorsque le synthétiseur OneCore est utilisé.
+
+
+Développement :
+- suppression du code concernant les versions de NVDA inférieures à la 2025.1.
+- amélioration de la réactivité de l'annonce de la lettre ou du mot suivant.
+- pour afficher le "Quoi de neuf" d'une nouvelle version de l'extension, le document "changes.html" n'est plus ouvert par"urlopen", mais est téléchargé , enregistré momentanément dans le dossier "appData\local\temp" et ouvert dans le navigateur.
+-  prise en compte de la fermeture du site rawgit.com pour la mise à jour  des extensions.
+- utilisation de json en lieu et place de pickle pour stoquer l'état de la mise à jour de l'extension.
+
+
+Mise en conformité avec l'API de NVDA : 
+- prise en compte du déplacement de la version de NVDA dans le module "buildVersion.py".
 
 
 + 1.13 (05/06/2025) +

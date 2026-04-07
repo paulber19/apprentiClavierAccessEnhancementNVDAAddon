@@ -1,6 +1,6 @@
 # globalPlugins\apprentiClavierAccessEnhancement\ac_globalPlugin.py
 # a part of apprentiClavierAccessEnhancement add-on
-# Copyright (C) 2019-2024 Paulber19
+# Copyright (C) 2019-2025 Paulber19
 # This file is covered by the GNU General Public License.
 
 
@@ -49,8 +49,4 @@ class ApprentiClavierGlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 	def onMenu(self, evt):
 		from .ac_configGui import ApprentiClavierSettingsDialog
-		from versionInfo import version_year, version_major
-		if [version_year, version_major] >= [2024, 1]:
-			gui.mainFrame.popupSettingsDialog(ApprentiClavierSettingsDialog)
-		else:
-			gui.mainFrame._popupSettingsDialog(ApprentiClavierSettingsDialog)
+		gui.mainFrame.popupSettingsDialog(ApprentiClavierSettingsDialog)

@@ -51,8 +51,6 @@ addon = addonHandler.getCodeAddon()
 GB_timer = None
 GB_speakTypeCharacter = None
 GB_precObjID = None
-# for debugging
-GB_traceMode = False
 
 #  to know if .module hasà focus
 GB_moduleHasFocus = False
@@ -71,11 +69,13 @@ score_keyHelp_timer = {
 	"14a,14b,14c,15a,15b,15c,19a,19b,19c,19d": (2, 4, -1)
 }
 
+# for debugging
+GB_traceMode = False
+
 
 def printDebug(text):
 	if GB_traceMode:
 		log.info(text)
-	return
 
 
 def TrapAltOrWindowsKey(gesture):
@@ -85,25 +85,28 @@ def TrapAltOrWindowsKey(gesture):
 		KeyboardInputGesture.fromName("windows").send()
 		KeyboardInputGesture.fromName("control").send()
 
+import winUser
+def getParent(hWnd):
+	hWndParent = winUser.getAncestor(hWnd, winUser.GA_PARENT)
+	# check if parent is not desktop window (desktop has no parent)
+	if winUser.getAncestor(hWndParent, winUser.GA_PARENT):
+		return hWndParent
+	return 0
+
+
 
 def GetTopLevelObject(obj=None):
-	global GB_inGetTopLevelFunction
-	GB_inGetTopLevelFunction += 1
 	if obj is None:
 		o = api.getFocusObject()
 	else:
 		o = obj
-	while o is not None:
-		oTop = o
-		try:
-			o = o.parent
-			if o.name and o.name.lower() == "bureau":
-				o = None
-		except Exception:
-			printDebug("getTopLevelObject: no parent")
-			o = None
-	GB_inGetTopLevelFunction -= 1
-	return oTop
+	hwndTop = o.windowHandle
+	hwndParent = getParent(hwndTop)
+	while hwndParent:
+		hwndTop = hwndParent
+		hwndParent = getParent(hwndParent)
+	from NVDAObjects.window import Window
+	return Window(windowHandle=hwndTop)
 
 
 def StopTimer(timer=None):
@@ -161,7 +164,6 @@ def SayText(sText1, sText2, sText3):
 		# printDebug("sText1 len %s" %len(sText2))
 		speech.speakMessage(sText2)
 		time.sleep(0.2)
-
 	if len(sText3) > 0:
 		if len(sText3) == 1 and sText3 in d.keys():
 			sText3 = d[sText3]
@@ -169,14 +171,12 @@ def SayText(sText1, sText2, sText3):
 			sText3 = sText3.lower() + " majuscule"
 		# printDebug("sText3 len %s" %len(sText3))
 		speech.speakMessage(sText3)
-
 	printDebug("SayText %s, %s, %s" % (sText1, sText2, sText3))
 	config.conf["speech"]["symbolLevel"] = curLevel
 
 
 def DireInfosTemporisee(obj, timer):
 	global GB_timer
-
 	StopTimer(GB_timer)
 	printDebug("DireInfoTemporisee %s" % timer)
 	GB_timer = wx.CallLater(timer, obj.DireInfos)
@@ -191,7 +191,6 @@ def GetLessonIdentifier(obj):
 		if u"exercice" in name.lower():
 			return EXERCICES_LESSON_IDENTIFIER
 		return 0
-
 	identifier = name[6:].replace(".", "")
 	return identifier.split(" ")
 
@@ -208,7 +207,6 @@ def getLessonMode(obj, sATaper=""):
 			mode = lessonToMode["".join((num, letter.lower()))]
 		except Exception:
 			mode = 0
-
 	return mode
 
 
@@ -232,20 +230,9 @@ def getATaperInfos():
 	return sATaper
 
 
-def getScoreControlID():
-	# le score se trouve dans la premier fenetre visible qui n'est pas un  timer
-	obj = api.getForegroundObject()
-	o = obj.firstChild
-	while o:
-		if (STATE_INVISIBLE not in o.states) and (o.windowClassName == "ThunderRTTextBox"):
-			return o.windowControlID
-		o = o.next
-	return -1
-
-
 def getATaperAndDejaTapeControlID():
 	oDeb = api.getForegroundObject()
-	if (oDeb is None) or len(oDeb.children) < 2:
+	if (oDeb is None) or oDeb.childCount < 2:
 		return (-1, -1)
 	o = oDeb.lastChild
 	if o:
@@ -646,7 +633,7 @@ class InLessonByKeyWindow(Window):
 	def GetInfos(self):
 
 		try:
-			oForeground = GetTopLevelObject(self).children[3].IAccessibleObject
+			oForeground = GetTopLevelObject(self).getChild(3).IAccessibleObject
 			(o, childId) = accNavigate(oForeground, 0, NAVDIR_LASTCHILD)
 		except Exception:
 			return
@@ -820,14 +807,6 @@ class InLessonByWordWindow(Window):
 			controlID, objID, self.role, self.value))
 		# SayValue(self.windowText)
 		printDebug("out event_gainFocus InLessonByWordWindow")
-
-	def getScoreControlID(self):
-		# le score se trouve dans la premiere fenetre apres la fenetre de class ThunderRTPictureBox
-		oDeb = api.getForegroundObject()
-		for o in oDeb.children:
-			if o.windowClassName == "ThunderRTPictureBox":
-				return o.windowControlID + 1
-		return -1
 
 	def GetInfos(self):
 		try:

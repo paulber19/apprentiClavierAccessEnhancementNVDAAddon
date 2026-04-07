@@ -14,8 +14,25 @@ Download:
 - [development versions: ADDON_DEV_URL]
 
 
++ 1.14 (February/26/2026) +
+Compatibility with NVDA 2026.1
+
+NVDA versions prior to 2025.1 are no longer supported.
+
+Bug fixes:
+- explanation pages are now read correctly when the OneCore synthesizer is used.
 
 
+Development:
+- removal of code regarding NVDA versions lower than 2025.1.
+- improved responsiveness of announcing the next letter or word.
+- to display the "What's new" of a new version of the extension, the "changes.html" document is no longer opened by "urlopen", but is downloaded, saved momentarily in the "appData\local\temp" folder and opened in the browser.
+- taking into account the closure of the rawgit.com site for updating add-ons.
+- use of json instead of pickle to store the add-on update status.
+
+
+Compliance with the NVDA API: 
+- taking into account the movement of the NVDA version in the "buildVersion.py" module.
 
 
 + 1.13 (June/05/2025) +

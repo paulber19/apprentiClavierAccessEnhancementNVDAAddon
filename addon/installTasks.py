@@ -26,16 +26,14 @@ def renameFile(file, dest):
 
 
 def keepPreviousSettingsConfirmation(addonSummary):
-	import os
 	import sys
 	curPath = os.path.dirname(__file__)
 	sharedPath = os.path.join(curPath, "shared")
 	sys.path.append(curPath)
 	sys.path.append(sharedPath)
-	from messages import confirm_YesNo, ReturnCode
+	from ac_messages import confirm_YesNo, ReturnCode
 	del sys.path[-1]
 	del sys.path[-1]
-	del sys.modules["messages"]
 
 	if confirm_YesNo(
 		# Translators: the label of a message box dialog.
@@ -54,11 +52,8 @@ def keepPreviousSettingsConfirmation(addonSummary):
 
 def onInstall():
 	import globalVars
-	import wx
-	import gui
 	curPath = os.path.dirname(__file__)
-	from addonHandler import _availableAddons
-	addon = _availableAddons[curPath]
+	addon = addonHandler ._availableAddons[curPath]
 	addonName = addon.manifest["name"]
 	addonSummary = addon.manifest["summary"]
 	# save old configuration
