@@ -6,8 +6,6 @@
 
 import addonHandler
 from logHandler import log
-import os
-import globalVars
 import time
 import appModuleHandler
 from characterProcessing import SymbolLevel
@@ -85,14 +83,16 @@ def TrapAltOrWindowsKey(gesture):
 		KeyboardInputGesture.fromName("windows").send()
 		KeyboardInputGesture.fromName("control").send()
 
+
 import winUser
+
+
 def getParent(hWnd):
 	hWndParent = winUser.getAncestor(hWnd, winUser.GA_PARENT)
 	# check if parent is not desktop window (desktop has no parent)
 	if winUser.getAncestor(hWndParent, winUser.GA_PARENT):
 		return hWndParent
 	return 0
-
 
 
 def GetTopLevelObject(obj=None):
@@ -110,7 +110,6 @@ def GetTopLevelObject(obj=None):
 
 
 def StopTimer(timer=None):
-	global GB_timer
 	printDebug("StopTimer")
 	if timer is None:
 		timer = GB_timer
@@ -442,7 +441,6 @@ class InLessonWindow(Window):
 		printDebug("out event_valueChange InLessonWindow")
 
 	def event_gainFocus(self):
-		global GB_timer
 		controlID = self.windowControlID
 		objID = GetObjectId(self)
 		printDebug("in event_gainFocus InLessonWindow controlID %s, objID %s, role  %s, value %s" % (
@@ -507,7 +505,7 @@ class InLessonWindow(Window):
 		return sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant
 
 	def DireInfos(self):
-		global GB_timer, GB_precObjID
+		global GB_precObjID
 		objID = GetObjectId(self)
 		StopTimer(GB_timer)
 		(sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant) = self.GetInfos()
@@ -597,7 +595,6 @@ class InLessonByKeyWindow(Window):
 		pass
 
 	def event_valueChange(self):
-		global GB_timer, GB_precObjID
 		objID = GetObjectId(self)
 		controlID = self.windowControlID
 		(scoreControlID, keyHelpControlID) = getScoreAndKeyHelpControlID(self)
@@ -620,7 +617,6 @@ class InLessonByKeyWindow(Window):
 		printDebug("out event_valueChange InLessonByKeyWindow")
 
 	def event_gainFocus(self):
-		global GB_timer
 		controlID = self.windowControlID
 		objID = GetObjectId(self)
 		printDebug("in event_gainFocus InLessonByKeyWindow controlID %s, objID %s, role  %s, value %s" % (
@@ -631,7 +627,6 @@ class InLessonByKeyWindow(Window):
 		printDebug("out event_gainFocus InLesssonByKeyWindow")
 
 	def GetInfos(self):
-
 		try:
 			oForeground = GetTopLevelObject(self).getChild(3).IAccessibleObject
 			(o, childId) = accNavigate(oForeground, 0, NAVDIR_LASTCHILD)
@@ -697,7 +692,6 @@ class InLessonByKeyWindow(Window):
 		return sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant
 
 	def DireInfos(self):
-		global GB_timer, GB_precObjID
 		# objID = GetObjectId(self)
 		StopTimer(GB_timer)
 		res = self.GetInfos()
@@ -729,7 +723,7 @@ class InLessonByKeyWindow(Window):
 
 class InLessonByKeyWindow_1(InLessonByKeyWindow):
 	def event_valueChange(self):
-		global GB_timer, GB_precObjID
+		global GB_timer
 		objID = GetObjectId(self)
 		controlID = self.windowControlID
 		(scoreControlID, keyHelpControlID) = getScoreAndKeyHelpControlID(self)
@@ -751,7 +745,7 @@ class InLessonByKeyWindow_1(InLessonByKeyWindow):
 
 class InLessonByKeyWindow_2(InLessonByKeyWindow):
 	def event_valueChange(self):
-		global GB_timer, GB_precObjID
+		global GB_timer
 		objID = GetObjectId(self)
 		controlID = self.windowControlID
 		(scoreControlID, keyHelpControlID) = getScoreAndKeyHelpControlID(self)
@@ -778,7 +772,7 @@ class InLessonByWordWindow(Window):
 		return super(InLessonByWordWindow, self).event_typedCharacter(ch)
 
 	def event_valueChange(self):
-		global GB_timer, GB_precObjID
+		global GB_timer
 		objID = GetObjectId(self)
 		controlID = self.windowControlID
 		printDebug("in event_valueChange InLessonByWordWindow controlID %s, objID %s , role %s, value %s" % (
@@ -800,12 +794,10 @@ class InLessonByWordWindow(Window):
 		printDebug("out event_valueChange InLessonByWordWindow")
 
 	def event_gainFocus(self):
-		global GB_timer
 		controlID = self.windowControlID
 		objID = GetObjectId(self)
 		printDebug("in event_gainFocus InLessonByWordWindow controlID %s, objID %s, role  %s, value %s" % (
 			controlID, objID, self.role, self.value))
-		# SayValue(self.windowText)
 		printDebug("out event_gainFocus InLessonByWordWindow")
 
 	def GetInfos(self):
@@ -853,7 +845,7 @@ class InLessonByWordWindow(Window):
 		return sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant
 
 	def DireInfos(self):
-		global GB_timer, GB_precObjID
+		global GB_precObjID
 		objID = GetObjectId(self)
 		StopTimer(GB_timer)
 		res = self.GetInfos()
@@ -954,7 +946,7 @@ class InLessonDictationWindow(Window):
 		return super(InLessonDictationWindow, self).event_typedCharacter(ch)
 
 	def event_valueChange(self):
-		global GB_timer, GB_precObjID
+		global GB_timer
 		objID = GetObjectId(self)
 		(aTaperControlID, dejaTapeControlID) = getATaperAndDejaTapeControlID()
 		controlID = self.windowControlID
@@ -980,7 +972,6 @@ class InLessonDictationWindow(Window):
 		printDebug("out event_valueChange InLessonDictationWindow")
 
 	def event_gainFocus(self):
-		global GB_timer
 		controlID = self.windowControlID
 		objID = GetObjectId(self)
 		printDebug("in event_gainFocus InLessonDictationWindow controlID %s, objID %s, role  %s, value %s" % (
@@ -1035,7 +1026,7 @@ class InLessonDictationWindow(Window):
 		return sATaper, sDejaTapee, sResteATaper, sMotCourant, sCaractereCourant
 
 	def DireInfos(self):
-		global GB_timer, GB_precObjID
+		global GB_precObjID
 		objID = GetObjectId(self)
 		# controlID = self.windowControlID
 		StopTimer(GB_timer)
@@ -1131,7 +1122,6 @@ class InLessonDictationWindow(Window):
 
 class InLessonDictationWindow_1(InLessonDictationWindow):
 	def event_valueChange(self):
-		global GB_timer, GB_precObjID
 		objID = GetObjectId(self)
 		controlID = self.windowControlID
 		# ne pas dire le timer
@@ -1153,7 +1143,7 @@ class InLessonDictationWindow_1(InLessonDictationWindow):
 		printDebug("out event_valueChange InLessonDictationWindow_1")
 
 	def DireInfos(self):
-		global GB_timer, GB_precObjID
+		global GB_precObjID
 		objID = GetObjectId(self)
 		# controlID = self.windowControlID
 		StopTimer(GB_timer)
@@ -1194,7 +1184,6 @@ class InLessonDictationWindow_1(InLessonDictationWindow):
 		GB_precObjID = objID
 
 	def DireLeCaractere(self):
-		global GB_timer
 		res = self.GetInfos()
 		if not res:
 			return
@@ -1251,12 +1240,10 @@ class AppModule(appModuleHandler.AppModule):
 		printDebug("save all NVDA modifier keys")
 		self.NVDAModifierKeys = config.conf["keyboard"]["NVDAModifierKeys"]
 
-
 	def restoreNVDAModifierKeys(self):
 		printDebug("restore all NVDA modifier Keys")
 		if hasattr(self, "NVDAModifierKeys"):
 			config.conf["keyboard"]["NVDAModifierKeys"] = self.NVDAModifierKeys
-
 
 	def event_appModule_gainFocus(self):
 		global GB_moduleHasFocus
@@ -1287,7 +1274,6 @@ class AppModule(appModuleHandler.AppModule):
 		self.restoreNVDAModifierKeys()
 
 	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
-		global GB_moduleHasFocus, GB_inGetTopLevelFunction
 		printDebug("choose overlayclass in,name= %s, controlID= %s, class= %s,role= %s" % (
 			obj.name, obj.windowControlID, obj.windowClassName, obj.role))
 		cls = "inchangee"
@@ -1403,7 +1389,6 @@ class AppModule(appModuleHandler.AppModule):
 			self.restoreNVDAModifierKeys()
 
 	def event_gainFocus(selwf, obj, nextHandler):
-		global GB_moduleHasFocus
 		printDebug("in  event_gainfocus appModule: name= %s, role= %s" % (obj.name, obj.role))
 		if not GB_moduleHasFocus:
 			printDebug("out event_gainfocus appModule with no Focus")
@@ -1461,7 +1446,6 @@ class AppModule(appModuleHandler.AppModule):
 	def script_test(self, gesture):
 		print("ApprentiClavier test")
 		ui.message("ApprentiClavier test")
-
 
 	__gestures = {
 		"kb:nvda+control+f9": "TraceOnOff",

@@ -7,12 +7,12 @@
 	* [Developpement' versions][2]
 * Compatibility:
 	* Minimum required NVDA version:  2025.1
-	* Last NVDA version tested:  2026.1
+	* Last NVDA version tested:  2026.2
 
 
 Provide voice assistance  to ApprentiClavier keyboard learner (french version and for french Azerty keyboard).
 
 Compatible and Tested with ApprentiClavier french version 1.0.9  and 1.0.10.
 
-[1]: https://github.com/paulber007/AllMyNVDAAddons/raw/master/apprentiClavierAccessEnhancement/apprentiClavierAccessEnhancement-1.14.nvda-addon
+[1]: https://github.com/paulber007/AllMyNVDAAddons/raw/master/apprentiClavierAccessEnhancement/apprentiClavierAccessEnhancement-1.15.nvda-addon
 [2]: https://github.com/paulber007/AllMyNVDAAddons/tree/master/apprentiClavierAccessEnhancement/dev

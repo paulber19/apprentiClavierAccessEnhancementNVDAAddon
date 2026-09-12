@@ -166,7 +166,7 @@ def Save():
 		# on exit" checkbox in General settings.
 	if not config.conf['general']['saveConfigurationOnExit']:
 		return
-	global conf
+
 	if not os.path.isdir(addonConfigFolderPath):
 		try:
 			os.makedirs(addonConfigFolderPath)

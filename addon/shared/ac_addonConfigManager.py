@@ -8,7 +8,6 @@ import addonHandler
 import os
 import globalVars
 import wx
-import gui
 import config
 from configobj import ConfigObj
 from configobj.validate import Validator, ValidateError

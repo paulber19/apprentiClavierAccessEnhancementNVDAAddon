@@ -16,7 +16,7 @@ import api
 from controlTypes.state import State
 STATE_CHECKED = State.CHECKED
 from . import ac_config
-from synthDriverHandler import getSynth, setSynth
+from synthDriverHandler import getSynth
 
 addonHandler.initTranslation()
 
@@ -57,7 +57,6 @@ class SpeedRateVoiceControl(object):
 	def __init__(self):
 		self.rateSetting = self.getSetting()
 
-
 	def getSetting(self):
 		settings = globalVars.settingsRing.settings
 		for setting in settings:
@@ -65,21 +64,20 @@ class SpeedRateVoiceControl(object):
 			if id == "rate":
 				return setting
 		return None
+
 	def getValue(self):
 		synthName = getSynth().name
 		rate = config.conf["speech"][synthName]["rate"]
 		return rate
 
-
 	def setValue(self, value):
 		if self.getValue() == value:
 			return
-		log.debug("new rate: %s" %value)
+		log.debug("new rate: %s" % value)
 		synth = getSynth()
 		config.conf["speech"][synth.name]["rate"] = value
 		synth.rate = value
 		globalVars.settingsRing.updateSupportedSettings(synth)
-
 
 	def getCurrentSetting(self):
 		min = self.rateSetting.min
